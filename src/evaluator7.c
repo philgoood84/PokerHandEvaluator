@@ -65,19 +65,12 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
 	int hash;
 
 	suit_hash += suitbit_by_id[a];
-	quinary[(a >> 2)]++;
 	suit_hash += suitbit_by_id[b];
-	quinary[(b >> 2)]++;
 	suit_hash += suitbit_by_id[c];
-	quinary[(c >> 2)]++;
 	suit_hash += suitbit_by_id[d];
-	quinary[(d >> 2)]++;
 	suit_hash += suitbit_by_id[e];
-	quinary[(e >> 2)]++;
 	suit_hash += suitbit_by_id[f];
-	quinary[(f >> 2)]++;
 	suit_hash += suitbit_by_id[g];
-	quinary[(g >> 2)]++;
 
 	if (suits[suit_hash])
 	{
@@ -91,6 +84,14 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
 
 		return flush[suit_binary[suits[suit_hash]-1]];
 	}
+
+	quinary[(a >> 2)]++;
+	quinary[(b >> 2)]++;
+	quinary[(c >> 2)]++;
+	quinary[(d >> 2)]++;
+	quinary[(e >> 2)]++;
+	quinary[(f >> 2)]++;
+	quinary[(g >> 2)]++;
 
 	hash = hash_quinary(quinary, 13, 7);
 
