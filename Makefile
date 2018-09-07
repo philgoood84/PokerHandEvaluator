@@ -1,5 +1,6 @@
 CC=gcc
 INCLUDE=./include
+CFLAGS=-Ofast
 
 all: five seven
 
