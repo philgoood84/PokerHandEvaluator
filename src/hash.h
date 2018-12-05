@@ -14,4 +14,9 @@
  *  limitations under the License.
  */
 
+#ifndef HASH_H
+#define HASH_H
+
 int hash_quinary(unsigned char q[], int len, int k);
+
+#endif // HASH_H

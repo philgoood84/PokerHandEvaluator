@@ -30,7 +30,11 @@
  * function if you need. Otherwise make sure the inputs are within the range 
  * [0, 51].
  */
+#ifndef EVALUATOR_H
+#define EVALUATOR_H
+
 int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_5cards(int a, int b, int c, int d, int e);
 
+#endif // EVALUATOR_H

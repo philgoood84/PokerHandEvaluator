@@ -14,6 +14,9 @@
  *  limitations under the License.
  */
 
+#ifndef TABLES_H
+#define TABLES_H
+
 extern const short flush[8192];
 extern const short noflush7[49205];
 extern const short noflush6[18395];
@@ -22,3 +25,5 @@ extern const unsigned char suits[4096];
 
 extern const int choose[53][8];
 extern const int dp[5][14][8];
+
+#endif // TABLES_H
