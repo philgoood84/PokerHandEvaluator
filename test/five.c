@@ -1,24 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "test.h"
+#include <assert.h>
 #include "evaluator.h"
-
-/*************************************************/
-/*                                               */
-/* Kevin L. Suffecool, 2001                      */
-/* suffecool@bigfoot.com                         */
-/*                                               */
-/*************************************************/
+#include "kev/kev_eval.h"
 
 int main(void)
 {
-    int freq[10];
-    int a, b, c, d, e, f, g, i, j;
-
-    // zero out the frequency array
-    for ( i = 0; i < 10; i++ )
-        freq[i] = 0;
+    int a, b, c, d, e;
 
     // loop over every possible five-card hand
 	for(a=0; a<48; a++)
@@ -31,17 +20,15 @@ int main(void)
 				{
 					for(e=d+1; e<52; e++)
 					{
-						i = evaluate_5cards(a, b, c, d, e);
-						j = hand_rank(i);
-						freq[j]++;
+						int ph_eval = evaluate_5cards(a, b, c, d, e);
+						int kev_eval = kev_eval_5cards(a, b, c, d, e);
+
+                        assert(ph_eval == kev_eval);
 					}
 				}
 			}
 		}
 	}
-
-	for(i=1;i<=9;i++)
-		printf( "%15s: %8d\n", value_str[i], freq[i] );
 
 	return 0;
 }
