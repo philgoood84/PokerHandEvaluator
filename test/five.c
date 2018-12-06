@@ -8,6 +8,7 @@
 int main(void)
 {
     int a, b, c, d, e;
+    int count = 0;
 
     // loop over every possible five-card hand
 	for(a=0; a<48; a++)
@@ -24,11 +25,15 @@ int main(void)
 						int kev_eval = kev_eval_5cards(a, b, c, d, e);
 
                         assert(ph_eval == kev_eval);
+
+                        count++;
 					}
 				}
 			}
 		}
 	}
+
+    printf("Test completed. Tested %d hands in total\n", count);
 
 	return 0;
 }

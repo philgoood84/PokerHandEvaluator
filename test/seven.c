@@ -8,6 +8,7 @@
 int main(void)
 {
     int a, b, c, d, e, f, g;
+    int count = 0;
 
 	for(a=0; a<46; a++)
 	{
@@ -27,6 +28,8 @@ int main(void)
                                 int kev_eval = kev_eval_7cards(a, b, c, d, e, f, g);
 
                                 assert(ph_eval == kev_eval);
+
+                                count++;
 							}
 						}
 					}
@@ -34,6 +37,8 @@ int main(void)
 			}
 		}
 	}
+
+    printf("Test completed. Tested %d hands in total\n", count);
 
 	return 0;
 }
