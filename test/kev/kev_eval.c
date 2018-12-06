@@ -1,4 +1,5 @@
 extern short eval_5cards_fast(int c1, int c2, int c3, int c4, int c5);
+extern short eval_6cards_fast(int c1, int c2, int c3, int c4, int c5, int c6);
 extern short eval_7cards_fast(int c1, int c2, int c3, int c4, int c5, int c6, int c7);
 
 int deck[52] =
@@ -9,6 +10,11 @@ int deck[52] =
 short kev_eval_5cards(int c1, int c2, int c3, int c4, int c5)
 {
     return eval_5cards_fast(deck[c1], deck[c2], deck[c3], deck[c4], deck[c5]);
+}
+
+short kev_eval_6cards(int c1, int c2, int c3, int c4, int c5, int c6)
+{
+    return eval_6cards_fast(deck[c1], deck[c2], deck[c3], deck[c4], deck[c5], deck[c6]);
 }
 
 short kev_eval_7cards(int c1, int c2, int c3, int c4, int c5, int c6, int c7)

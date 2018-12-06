@@ -33,9 +33,6 @@ unsigned find_fast(unsigned u)
     return r;
 }
 
-short eval_5cards_fast(int c1, int c2, int c3, int c4, int c5);
-short eval_7hand_fast(int *hand);
-
 short eval_5cards_fast(int c1, int c2, int c3, int c4, int c5)
 {
     int q = (c1 | c2 | c3 | c4 | c5) >> 16;
@@ -48,6 +45,39 @@ short eval_5cards_fast(int c1, int c2, int c3, int c4, int c5)
 short eval_5hand_fast(int *hand)
 {
 	return eval_5cards_fast(hand[0], hand[1], hand[2], hand[3], hand[4]);
+}
+
+short eval_6hand_fast(int *hand)
+{
+    int i;
+    short best = 9999;
+    int perm[][5] = {
+        { 0, 1, 2, 3, 4 },
+        { 0, 1, 2, 3, 5 },
+        { 0, 1, 2, 4, 5 },
+        { 0, 1, 3, 4, 5 },
+        { 0, 2, 3, 4, 5 },
+        { 1, 2, 3, 4, 5 },
+    };
+
+    for (i = 0; i < 6; i++)
+    {
+        int subhand[5];
+        int j;
+        for (j = 0; j < 5; j++)
+            subhand[j] = hand[perm[i][j]];
+        int q = eval_5hand_fast(subhand);
+        if (q < best)
+            best = q;
+    }
+
+    return best;
+}
+
+short eval_6cards_fast(int c1, int c2, int c3, int c4, int c5, int c6)
+{
+    int hand[] = { c1, c2, c3, c4, c5, c6 };
+    return eval_6hand_fast(hand);
 }
 
 short eval_7hand_fast(int *hand)

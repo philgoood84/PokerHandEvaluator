@@ -7,6 +7,9 @@ all: five seven
 five: test/five.o libpheval5.a test/kev/libkev.a
 	${CC} ${CFLAGS} $^ -o $@
 
+six: test/six.o libpheval6.a test/kev/libkev.a
+	${CC} ${CFLAGS} $^ -o $@
+
 seven: test/seven.o libpheval7.a test/kev/libkev.a
 	${CC} ${CFLAGS} $^ -o $@
 
@@ -29,5 +32,5 @@ test/kev/libkev.a: test/kev/fast_eval.o test/kev/kev_eval.o
 	${CC} -c ${CFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm -f src/*.o test/*.o test/kev/*.o test/kev/*.a *.o *.a five seven
+	rm -f src/*.o test/*.o test/kev/*.o test/kev/*.a *.o *.a five six seven
 
