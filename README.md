@@ -99,3 +99,10 @@ So the complete card Id representation is:
 | Q | 40| 41| 42| 43|
 | K | 44| 45| 46| 47|
 | A | 48| 49| 50| 51|
+
+---------
+Other Implementations
+---------
+There is a javascript implementation using the same algorithm.
+
+https://github.com/thlorenz/phe
