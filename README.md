@@ -48,6 +48,12 @@ Interfaces
 ---------
 The file `include/evaluator.h` contains the interfaces you need to call.
 
+```
+int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
+int evaluate_6cards(int a, int b, int c, int d, int e, int f);
+int evaluate_5cards(int a, int b, int c, int d, int e);
+```
+
 The inputs are card ids ranged [0, 51]. The card id modulo 4 gives the suit.
 It doesn't really matter how you assign the four numbers to the 4 suits, as
 long as they use distinct numbers. The card id divided by 4 gives the rank,
