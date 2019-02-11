@@ -11,7 +11,7 @@ Copyright 2016 Henry Lee (lee0906@hotmail.com)
 Overview
 ---------
 It's a brand new algorithm, which avoids traversing all 7 choose 5 combinations
-when evaluating a 7-card poker hand, but uses a perfect hash function instead.
+when evaluating a 7-card poker hand, using a perfect hash function instead.
 
 The implementation supports both 5-card and 7-card evaluation, where the 7-card
 version beats many other algorithms in the execution time, and it's also using
@@ -54,7 +54,7 @@ int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_5cards(int a, int b, int c, int d, int e);
 ```
 
-The inputs are card ids ranged [0, 51]. The card id modulo 4 gives the suit.
+The inputs are card ids ranged [0, 52). The card id modulo 4 gives the suit.
 It doesn't really matter how you assign the four numbers to the 4 suits, as
 long as they use distinct numbers. The card id divided by 4 gives the rank,
 where ace has the highest value 12 and deuce has the lowest value 0.
