@@ -1,5 +1,7 @@
 # PHEvaluator
 
+[![Build Status](https://travis-ci.com/HenryRLee/PokerHandEvaluator.svg?branch=master)](https://travis-ci.com/HenryRLee/PokerHandEvaluator)
+
 PH stands for Poker Hand, as well as Perfect Hashing.
 
 A poker hand evaluation algorithm with perfect hash functions and dynamic
