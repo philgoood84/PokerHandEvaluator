@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <assert.h>
-#include "evaluator.h"
+#include "phevaluator/phevaluator.h"
 #include "kev/kev_eval.h"
 
 int main(void)
