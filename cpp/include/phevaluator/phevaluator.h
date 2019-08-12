@@ -33,8 +33,16 @@
 #ifndef EVALUATOR_H
 #define EVALUATOR_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_5cards(int a, int b, int c, int d, int e);
+
+#ifdef __cplusplus
+} // closing brace for extern "C"
+#endif
 
 #endif // EVALUATOR_H

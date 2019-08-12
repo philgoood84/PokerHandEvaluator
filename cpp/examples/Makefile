@@ -1,15 +1,17 @@
 CC=gcc
+CXX=g++
 TOPDIR=..
 INCLUDE=${TOPDIR}/include
 SRC=${TOPDIR}/src
+CXXFLAG+=-std=c++11
 
 all: example1 example2
 
 example1: example1.o ${SRC}/libpheval7.a
 	${CC} ${CFLAGS} $^ -o $@
 
-example2: example2.cc ${SRC}/evaluator7.c ${SRC}/hash.c ${SRC}/hashtable.c ${SRC}/hashtable7.c ${SRC}/dptables.c
-	g++ ${CFLAGS} -std=c++11 -I${INCLUDE} $^ -o $@
+example2: example2.cc ${SRC}/libpheval7.a
+	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
 ${SRC}/libpheval5.a: ${SRC}/evaluator5.o ${SRC}/hash.o ${SRC}/hashtable.o ${SRC}/hashtable5.o ${SRC}/dptables.o
 	ar rcs $@ $^
