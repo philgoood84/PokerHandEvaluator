@@ -244,7 +244,7 @@ The base cases for the array dp:
   if 0 <= i <= 4:
     dp[1][1][i] = 1;
   if i > 4:
-	dp[1][1][i] = 0;
+    dp[1][1][i] = 0;
 ```
 
 For example, the 1-bit quinary with k=4 has one instance, which is exactly 4.
@@ -254,7 +254,7 @@ Then we iterate the edges:
 
 ```
   for each i in [1, 13]:
-	dp[1][i][1] = i; dp[1][i][0] = 1;
+    dp[1][i][1] = i; dp[1][i][0] = 1;
 ```
 
 An example is a 3-bit quinary with k=1, it has three instances 001, 010, 100. If
@@ -264,7 +264,7 @@ Now we can iterate all `dp[1][i][j]`:
 
 ```
   for each i in [2, 13] and j in [2, 7]:
-	dp[1][i][j] = \sum_{k=0}^{4}dp[0][i-1][j-k];
+    dp[1][i][j] = \sum_{k=0}^{4}dp[0][i-1][j-k];
 ```
 
 For example, to evaluate `dp[1][2][7]`, we need to enumerate the second bit
@@ -275,7 +275,7 @@ Now the iteration for the rest of the entries:
 
 ```
   for each l in [2, 4] and i in [1, 13] and j in [0, 7]:
-	dp[l][i][j] = dp[l-1][i][j] + dp[1][i][j-l]
+    dp[l][i][j] = dp[l-1][i][j] + dp[1][i][j-l]
 ```
 
 For example `dp[4][4][5]`, which is equivalent to the number of valid
