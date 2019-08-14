@@ -20,6 +20,7 @@ a 52-bit binary uniquely, with exactly 7 bits set to 1 and 45 bits set to 0.
 
 For example, if a hand has
 
+```
  5 of Spades,
  4 of Clubs,
  7 of Spades,
@@ -27,12 +28,15 @@ For example, if a hand has
  Ace of Clubs,
  10 of Spades,
  and 5 of Hearts,
+```
 
 we can have such a 52-bit binary as a represenation:
 
+```
  |   Spades   |   Hearts   |  Diamonds  |   Clubs   |
  23456789TJQKA23456789TJQKA23456789TJQKA23456789TJQKA
  0001010010000000100000000000000000010000010000000001
+```
 
 We can see that there are totally 52 choose 7 = 133,784,560 combinations of such
 representations. If we could map each hand representation to a number range from
@@ -46,28 +50,33 @@ lexicographical ordering, this functions is exactly the perfect hash function.
 
 Let's formalize this to a more general problem, and name it HashNBinaryKSum.
 
+```
  Problem: HashNBinaryKSum
 
  Input: integer n, integer k, an n-bit binary with exactly k bits set to 1
 
  Output: the position of the binary in the lexicographical ordering of all n-bit
  binaries with exactly k bits of ones
+```
 
 Consider an example with n = 4 and k = 2, the binary 0011 should return 1, and
 1010 should return 5.
 
+```
 	0011 0101 0110 1001 1010 1100
+```
 
 The problem can be solved in recursions. In order to get the position in the
 ordering, we can instead count how many numbers are ahead of that position.
 
-Take 1010 for example, we can count the number of valid numbers in the range [0,
-1010). As for counting the numbers in range [0, 1010), we can first count the
-numbers in [0, 1000), then count [1000, 1010). To solve the former case [0,
-1000), we can use 3 choose 2, which is the number of combinations of filling 2
-ones in the last 3 bits. The latter case [1000, 1010) is equivalent to [000,
-010), with both the parameter n and k decrement by 1, so it becomes a smaller
-problem and can be solved in another recursion.
+Take 1010 for example, we can count the number of valid numbers in the range
+`[0, 1010)`. As for counting the numbers in range `[0, 1010)`, we can first
+count the numbers in `[0, 1000)`, then count `[1000, 1010)`. To solve the
+former case `[0, 1000)`, we can use 3 choose 2, which is the number of
+combinations of filling 2 ones in the last 3 bits. The latter case
+`[1000, 1010)` is equivalent to `[000, 010)`, with both the parameter n
+and k decrement by 1, so it becomes a smaller problem and can be solved
+in another recursion.
 
 We can optimize the recursion to a loop, and the sample C code is shown below.
 
@@ -141,6 +150,7 @@ function that evaluates flush hands.
 
 For example, given the input:
 
+```
  5 of Spades,
  4 of Spades,
  7 of Spades,
@@ -148,13 +158,16 @@ For example, given the input:
  Ace of Clubs,
  10 of Spades,
  8 of Spades,
+```
 
 our 4 counters and binaries are:
 
+```
  Spades:     counter 5, binary 0000101101100
  Hearts:     counter 0, binary 0000000000000
  Clubs:      counter 1, binary 1000000000000
  Diamonds:   counter 1, binary 0001000000000
+```
 
 As soon as we see the counter of Spades is greater than 4, we can pass the
 binary 0000101101100 to the next function to evaluate the flush. We don't need
@@ -188,6 +201,7 @@ did in the binary hash, if we sort all the quinary in lexicographical order,
 where the sum of all bits of each quinary is equal to 7, the position in this
 ordering is a perfect hash of this quinary.
 
+```
  Problem: HashNQuinaryKSum
 
  Input: integer n, integer k, an n-bit quinary with the sum of all bits equal to
@@ -195,6 +209,7 @@ ordering is a perfect hash of this quinary.
 
  Output: the position of the quinary in the lexicographical ordering of all
  n-bit quinaries with sum of all bits equal to k
+```
 
 Similar to what we did in the binary hash, in order to get the position of the
 quinary, we can count how many valid numbers are smaller than this quinary. For
@@ -308,12 +323,14 @@ function, it's still a useful approach.
 
 Let's go back to that problem HashNBinaryKSum:
 
+```
  Problem: HashNBinaryKSum
 
  Input: integer n, integer k, an n-bit binary with exactly k bits set to 1
 
  Output: the position of the binary in the lexicographical ordering of all n-bit
  binaries with exactly k bits of ones
+```
 
 More specificly, we are trying to solve a problem with n = 52 and k = 7. If we
 split the 52-bit binary into 4 blocks, where each block has 13 bits, we can
