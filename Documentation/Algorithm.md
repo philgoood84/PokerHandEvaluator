@@ -264,7 +264,7 @@ Now we can iterate all `dp[1][i][j]`:
 
 ```
   for each i in [2, 13] and j in [2, 7]:
-    dp[1][i][j] = \sum_{k=0}^{4}dp[0][i-1][j-k];
+    dp[1][i][j] = SUM{k:[0,4]}dp[0][i-1][j-k];
 ```
 
 For example, to evaluate `dp[1][2][7]`, we need to enumerate the second bit
@@ -372,7 +372,7 @@ chapters. I'll just put the sample C code here and omit the explanations.
 And the hash function only need to sum up the result from the dp table. The C
 code is shown below.
 
-```
+```c
 int fast_hash(unsigned long long handid, int k)
 {
 	int hash = 0;
