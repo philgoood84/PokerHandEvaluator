@@ -14,35 +14,73 @@
  *  limitations under the License.
  */
 
-/*
- * Card id, ranged from 0 to 51.
- *
- * The two least significant bits represent the 4 suits, ranged from 0-3.
- *
- * The rest of it represent the 13 ranks, ranged from 0-12.
- * More specifically:
- * deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
- * nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
- *
- * 13 * 4 gives all 52 ids.
- *
- * WARNING: The code doesn't provide any sanity checks. Wrap it in your own
- * function if you need. Otherwise make sure the inputs are within the range 
- * [0, 51].
- */
-#ifndef EVALUATOR_H
-#define EVALUATOR_H
+
+#ifndef PHEVALUATOR_H
+#define PHEVALUATOR_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
-int evaluate_6cards(int a, int b, int c, int d, int e, int f);
+/*
+ * Return an integer indicating the rank of the hand. The strongest hand
+ * returns 1, and the weakest hand returns 7462.
+ *
+ * Each parameter is a card ID, ranged [0 to 52).
+ *
+ * The two least significant bits represent the 4 suits, ranged from 0-3.
+ *
+ * The rest of it represent the 13 ranks, ranged from 0-12.
+ *
+ * More specifically:
+ * deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
+ * nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
+ *
+ * So that you can use `rank * 4 + suit` to get the card ID.
+ *
+ * A mapping of the card and the card Id is shown below:
+ *
+ * |   | C | D | H | S |
+ * |---|---|---|---|---|
+ * | 2 | 0 | 1 | 2 | 3 |
+ * | 3 | 4 | 5 | 6 | 7 |
+ * | 4 | 8 | 9 | 10| 11|
+ * | 5 | 12| 13| 14| 15|
+ * | 6 | 16| 17| 18| 19|
+ * | 7 | 20| 21| 22| 23|
+ * | 8 | 24| 25| 26| 27|
+ * | 9 | 28| 29| 30| 31|
+ * | T | 32| 33| 34| 35|
+ * | J | 36| 37| 38| 39|
+ * | Q | 40| 41| 42| 43|
+ * | K | 44| 45| 46| 47|
+ * | A | 48| 49| 50| 51|
+ *
+ */
 int evaluate_5cards(int a, int b, int c, int d, int e);
+int evaluate_6cards(int a, int b, int c, int d, int e, int f);
+int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 
 #ifdef __cplusplus
 } // closing brace for extern "C"
 #endif
 
-#endif // EVALUATOR_H
+#ifdef __cplusplus
+
+#include "phevaluator/card.h"
+
+int EvaluateCards(Card a, Card b, Card c, Card d, Card e) {
+  return evaluate_5cards(a, b, c, d, e);
+}
+
+int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f) {
+  return evaluate_6cards(a, b, c, d, e, f);
+}
+
+int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g) {
+  return evaluate_7cards(a, b, c, d, e, f, g);
+}
+
+#endif // __cplusplus
+
+#endif // PHEVALUATOR_H
