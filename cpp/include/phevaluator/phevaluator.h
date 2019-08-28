@@ -69,6 +69,8 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 
 #include "phevaluator/card.h"
 
+namespace phevaluator {
+
 int EvaluateCards(Card a, Card b, Card c, Card d, Card e) {
   return evaluate_5cards(a, b, c, d, e);
 }
@@ -80,6 +82,8 @@ int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f) {
 int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g) {
   return evaluate_7cards(a, b, c, d, e, f, g);
 }
+
+} // namespace phevaluator
 
 #endif // __cplusplus
 

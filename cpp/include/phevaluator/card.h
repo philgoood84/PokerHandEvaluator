@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <string>
 
+namespace phevaluator {
+
 class Card {
  public:
   Card() {}
@@ -35,6 +37,8 @@ class Card {
  private:
   int id_;
 };
+
+} // namespace phevaluator
 
 #endif // __cplusplus
 

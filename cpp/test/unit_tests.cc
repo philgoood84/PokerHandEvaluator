@@ -3,6 +3,8 @@
 #include "phevaluator/phevaluator.h"
 #include "kev/kev_eval.h"
 
+using namespace phevaluator;
+
 void TestFiveCards()
 {
   int count = 0;
