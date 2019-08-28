@@ -4,15 +4,9 @@ INCLUDE=./include
 CFLAGS+=-Ofast
 CXXFLAGS+=-Ofast -std=c++14
 
-all: five six seven
+all: unit_tests
 
-five: test/five.o libpheval.a test/kev/libkev.a
-	${CXX} ${CXXFLAGS} $^ -o $@
-
-six: test/six.o libpheval.a test/kev/libkev.a
-	${CXX} ${CXXFLAGS} $^ -o $@
-
-seven: test/seven.o libpheval.a test/kev/libkev.a
+unit_tests: test/unit_tests.o libpheval.a test/kev/libkev.a
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 libpheval.a: src/evaluator5.o src/evaluator6.o src/evaluator7.o \
@@ -30,5 +24,4 @@ test/kev/libkev.a: test/kev/fast_eval.o test/kev/kev_eval.o
 	${CXX} -c ${CXXFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm -f src/*.o test/*.o test/kev/*.o test/kev/*.a *.o *.a five six seven
-
+	rm -f src/*.o test/*.o test/kev/*.o test/kev/*.a *.o *.a unit_tests

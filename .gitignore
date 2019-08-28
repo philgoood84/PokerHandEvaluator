@@ -28,6 +28,5 @@
 *.app
 *.sh
 
-five
-six
-seven
+# Editors
+*.swp
