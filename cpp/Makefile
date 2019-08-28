@@ -6,6 +6,9 @@ CXXFLAGS+=-Ofast -std=c++14
 
 all: unit_tests
 
+test: unit_tests
+	./unit_tests
+
 unit_tests: test/unit_tests.o libpheval.a test/kev/libkev.a
 	${CXX} ${CXXFLAGS} $^ -o $@
 

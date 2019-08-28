@@ -79,7 +79,7 @@ void TestSevenCards()
 {
   int count = 0;
 
-  std::printf("Start testing six cards\n");
+  std::printf("Start testing seven cards\n");
 
   for(int a = 0; a < 46; a ++)
   {
@@ -120,6 +120,7 @@ int main(void)
   TestFiveCards();
   TestSixCards();
   TestSevenCards();
+  std::printf("All tests completed.\n");
 
   return 0;
 }
