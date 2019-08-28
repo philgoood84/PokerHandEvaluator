@@ -1,45 +1,36 @@
-# PHEvaluator
+# C/C++ Library
 
 ## Compile and test
 
-Simply run `make` can compile the libraries and the unit test programs.
+Run `make` to build the `unit_tests` binaray.
 
-If you'd like to add some more flags in gcc, you may export the flags to the
-environment variable `CFLAGS`. One example is `export CLFAGS="-Ofast"`.
+Run `make test` to build the unit test and run it.
 
-After the compilation, it generates two unit test programs `five` and `seven`.
-These test programs loop over all possible hands and compare the result with
-the Cactus Kev's evaluator.
+Run `make libpheval.a` to build the library.
 
-To compile those example codes, simply `cd examples` and running `make` will
-compile all the examples.
+## Use the library
 
-## Interfaces
+After building the library `libpheval.a`, you can add the `./include`
+directory to your includes path (e.g. `g++ -I ./include`).
 
-The file `include/evaluator.h` contains the interfaces you need to call.
+PH Evaluator was originally coded in C, so it still preserves the C functions.
 
 ```
-int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
-int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_5cards(int a, int b, int c, int d, int e);
+int evaluate_6cards(int a, int b, int c, int d, int e, int f);
+int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 ```
 
-The inputs are card ids ranged [0, 52). The card id modulo 4 gives the suit.
-It doesn't really matter how you assign the four numbers to the 4 suits, as
-long as they use distinct numbers. The card id divided by 4 gives the rank,
-where ace has the highest value 12 and deuce has the lowest value 0.
+However using these functions, user needs to convert his card into an integer
+ranged `[0, 52)`. You can find the mapping in the section [Card Id](#cardid).
 
-The return value is identical to the Cactus Kev's evaluator. The strongest hands
-(Royal straight flush) are returned with 1, and the second strongest hands (King
-high straight flush) are returned with 2 and so on. The weakest hands have the
-return value 7462.
+The return value is identical to the Cactus Kev's evaluator. The strongest
+hands (Royal straight flush) returns 1, and the second strongest hands (King
+high straight flush) returns 2 and so on. The weakest hands have the return
+value 7462.
 
-You can find more about Cactus Kev's evaluation system from these websites.
-
-http://suffe.cool/poker/evaluator.html
-http://suffe.cool/poker/7462.html
-
-# Card Id
+<a name="cardid"></a>
+## Card Id
 
 We use an integer to represent a card. The two least significant bits
 represent the 4 suits, ranged from 0-3. The rest of it represent the 13
