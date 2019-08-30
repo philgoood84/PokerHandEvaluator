@@ -38,7 +38,9 @@ extern "C" {
  *
  * So that you can use `rank * 4 + suit` to get the card ID.
  *
- * A mapping of the card and the card Id is shown below:
+ * The complete card Id mapping can be found below. The rows are the ranks
+ * from 2 to Ace, and the columns are the suits: club, diamond, heart and
+ * spade.
  *
  * |   | C | D | H | S |
  * |---|---|---|---|---|

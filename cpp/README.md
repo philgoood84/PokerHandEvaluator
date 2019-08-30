@@ -67,9 +67,10 @@ More specifically:
 deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
 nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
 
-13 * 4 gives all 52 ids.
+So that you can use `rank * 4 + suit` to get the card ID.
  
-So the complete card Id representation is:
+The complete card Id mapping can be found below. The rows are the ranks
+from 2 to Ace, and the columns are the suits: club, diamond, heart and spade.
 
 |   | C | D | H | S |
 |---|---|---|---|---|
