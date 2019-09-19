@@ -32,6 +32,8 @@ class Card {
     id_ = rankMap.at(name[0]) * 4 + suitMap.at(name[1]);
   }
 
+  Card(const char name[]) : Card(std::string(name)) {}
+
   operator int() const { return id_; }
 
  private:
