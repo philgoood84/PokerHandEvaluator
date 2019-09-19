@@ -8,7 +8,7 @@
  * be used as the parameter in the evaluator. It also shows how to use the
  * return value to determine which hand is the stronger one.
  */
-int main(void)
+int main()
 {
     int a, b, c, d, e, f, g, h, i;
 	int x, y;
@@ -57,6 +57,7 @@ int main(void)
 
 	printf("The rank of the hand in player 1 is %d\n", x); // expected 292
 	printf("The rank of the hand in player 2 is %d\n", y); // expected 236
+	printf("Player 2 has a stronger hand\n");
 
 	// Since the return value of the hand in player 2 is less than player 1,
 	// it's considered to be a higher rank and stronger hand.
