@@ -11,7 +11,14 @@ Run `make libpheval.a` to build the library only.
 ## Use the library
 
 After building the library `libpheval.a`, you can add the `./include`
-directory to your includes path (e.g. `g++ -I ./include`).
+directory to your includes path, and link the library to your source
+code. In addition, at least C++11 standard is required.
+
+For example:
+
+```bash
+g++ -I include/ -std=c++11 libpheval.a your_source_code.cc your_binary
+```
 
 ### C methods
 
@@ -30,6 +37,8 @@ The return value is an integer indicating the rank of the hand, in the range
 `[1, 7452]` with the strongest hands (Royal straight flush) returning 1, the
 second strongest hands (King high straight flush) returning 2, and the weakest
 hands returning 7462.
+
+As a result, a lower return value indicates a stronger hand.
 
 Both the input and output is identical to the Cactus Kev's evaluator.
 
@@ -55,6 +64,71 @@ Card b("AH"); // Ace in Hearts
 The return value is the same to the C version, which is an integer in the
 range `[1, 7452]` indicating the rank of the hand, where a smaller number
 is stronger.
+
+## Examples
+
+In this example we use a scenario in the game Texas Holdem:
+
+Community cards: 9c 4c 4s 9d 4h (both players share this cards)
+
+Player 1: Qc 6c
+
+Player 2: 2c 9h
+
+Both player have a full house. But player 1 only has a full house with 4,
+while player 2 has a full house with 9, which is stronger.
+
+The expected result is player 2 has a stronger hand than player 1, hence
+the return value of the evaluation is lower than player 1.
+
+### C++ methods
+
+To evaluate the hands in the above example, we can use the C++ method
+`phevaluator::EvaluateCards` and pass the 7 cards as arguments.
+
+```c++
+#include "phevaluator/phevaluator.h"
+#include <cassert>
+
+int main() {
+  int x = phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
+  int y = phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9h");
+
+  assert(x > y);
+}
+```
+
+### C methods
+
+In the C version, the evaluation would be tricker, since we have to convert
+the card to an integer by ourselves.
+
+```c
+#include "phevaluator/phevaluator.h"
+#include <assert>
+
+int main() {
+  // Community cards
+  int a = 7 * 4 + 0; // 9c
+  int b = 2 * 4 + 0; // 4c
+  int c = 2 * 4 + 3; // 4s
+  int d = 7 * 4 + 1; // 9d
+  int e = 2 * 4 + 2; // 4h
+
+  // Player 1
+  int f = 10 * 4 + 0; // Qc
+  int g = 4 * 4 + 0; // 6c
+
+  // Player 2
+  int h = 0 * 4 + 0; // 2c
+  int i = 7 * 4 + 2; // 9h
+
+  int x = evaluate_7cards(a, b, c, d, e, f, g);
+  int y = evaluate_7cards(a, b, c, d, e, h, i);
+
+  assert(x > y);
+}
+```
 
 <a name="cardid"></a>
 ## Card Id
