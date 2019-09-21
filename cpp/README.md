@@ -103,6 +103,16 @@ int main() {
 In the C version, the evaluation would be tricker, since we have to convert
 the card to an integer by ourselves.
 
+The formula is `rank * 4 + suit`.
+
+We use 0 for the clubs, 1 for the diamonds, 2 for the hearts, and 3 for the
+spades.
+
+And the rank values are:
+
+deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
+nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
+
 ```c
 #include "phevaluator/phevaluator.h"
 #include <assert>
@@ -133,7 +143,7 @@ int main() {
 <a name="cardid"></a>
 ## Card Id
 
-We use an integer to represent a card. The two least significant bits
+We can use an integer to represent a card. The two least significant bits
 represent the 4 suits, ranged from 0-3. The rest of it represent the 13
 ranks, ranged from 0-12.
 
