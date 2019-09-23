@@ -75,11 +75,11 @@ Player 1: Qc 6c
 
 Player 2: 2c 9h
 
-Both player have a full house. But player 1 only has a full house with 4,
+Both players have full houses. But player 1 only has a full house with 4,
 while player 2 has a full house with 9, which is stronger.
 
 The expected result is player 2 has a stronger hand than player 1, hence
-the return value of the evaluation is lower than player 1.
+the return value of the evaluation of player 2 is lower than player 1.
 
 ### C++ methods
 
