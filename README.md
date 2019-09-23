@@ -18,7 +18,7 @@ distinct values.
 Still, Kev's solution is specific for a five card hand. To evaluate a seven
 card poker hand (which is more pupular because of Texas Hold'em) using Kev's
 algorithm, one brute force solution is to iterate all 7 choose 5 combination,
-running his 5 card evaluation algorithm 35 times to find the best answer,
+running his 5 card evaluation algorithm 21 times to find the best answer,
 which is too time inefficient.
 
 [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) is designed
