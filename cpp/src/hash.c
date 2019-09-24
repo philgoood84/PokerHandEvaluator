@@ -19,45 +19,45 @@
 
 int hash_quinary(unsigned char q[], int len, int k)
 {
-	int sum = 0;
-	int i;
+  int sum = 0;
+  int i;
 
-	for (i=0; i<len; i++)
-	{
-		sum += dp[q[i]][len-i-1][k];
+  for (i=0; i<len; i++)
+  {
+    sum += dp[q[i]][len-i-1][k];
 
-		k -= q[i];
+    k -= q[i];
 
-		if (k <= 0)
-		{
-			break;
-		}
-	}
+    if (k <= 0)
+    {
+      break;
+    }
+  }
 
-	return sum;
+  return sum;
 }
 
 int hash_binary(unsigned char q[], int len, int k)
 {
-	int sum = 0;
-	int i;
+  int sum = 0;
+  int i;
 
-	for (i=0; i<len; i++)
-	{
-		if (q[i])
-		{
-			if (len-i-1 >= k)
-				sum += choose[len-i-1][k];
+  for (i=0; i<len; i++)
+  {
+    if (q[i])
+    {
+      if (len-i-1 >= k)
+        sum += choose[len-i-1][k];
 
-			k--;
+      k--;
 
-			if (k == 0)
-			{
-				break;
-			}
-		}
-	}
+      if (k == 0)
+      {
+        break;
+      }
+    }
+  }
 
-	return sum;
+  return sum;
 }
 
