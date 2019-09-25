@@ -102,6 +102,28 @@ short eval_7cards_fast(int c1, int c2, int c3, int c4, int c5, int c6, int c7)
     return eval_7hand_fast(hand);
 }
 
+short minv(short a, short b)
+{
+  if (a < b) return a;
+  else return b;
+}
+
+short eval_8cards_fast(int c1, int c2, int c3, int c4, int c5, int c6, int c7, int c8)
+{
+  short best = 10000;
+
+  best = minv(best, eval_7cards_fast(c1, c2, c3, c4, c5, c6, c7));
+  best = minv(best, eval_7cards_fast(c8, c2, c3, c4, c5, c6, c7));
+  best = minv(best, eval_7cards_fast(c1, c8, c3, c4, c5, c6, c7));
+  best = minv(best, eval_7cards_fast(c1, c2, c8, c4, c5, c6, c7));
+  best = minv(best, eval_7cards_fast(c1, c2, c3, c8, c5, c6, c7));
+  best = minv(best, eval_7cards_fast(c1, c2, c3, c4, c8, c6, c7));
+  best = minv(best, eval_7cards_fast(c1, c2, c3, c4, c5, c8, c7));
+  best = minv(best, eval_7cards_fast(c1, c2, c3, c4, c5, c6, c8));
+
+  return best;
+}
+
 unsigned short hash_adjust[] = 
 {
     0, 5628, 7017, 1298, 2918, 2442, 8070, 6383, 6383, 7425, 2442, 5628, 8044, 7425, 3155, 6383, 
