@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Chapter 1: A Basic Evaluation Algorithm](#chapter1)
-- [Chapter 2: Split Into Two Branches](#chapter2)
+- [Chapter 2: Evaluate the Flushes First](#chapter2)
 - [Chapter 3: Hash For a Restricted Quinary](#chapter3)
 - [Chapter 4: The Ultimate Dynamic Programming](#chapter4)
 
@@ -119,7 +119,7 @@ Proceed to chapter 2, you will find out how a more advanced algorithm can solve
 the problem.
 
 <a name="chapter2"></a>
-## Chapter 2: Evaluate the flushes first
+## Chapter 2: Evaluate the Flushes First
 
 What makes a poker evaluator complicated, is the Flush category (including the
 Straight Flush). If we don't care about the Flush, we can ignore the suits, and
@@ -172,7 +172,7 @@ our 4 counters and binaries are:
 As soon as we see the counter of Spades is greater than 4, we can pass the
 binary 0000101101100 to the next function to evaluate the flush. We don't need
 to worry about the other cards in other suits, because none of those cards can
-be part of the best 5-card hand.
+form another flush.
 
 We can of course use the HashNBinaryKSum function and three hash table (k can be
 5, 6 and 7) to evaluate the flush binary. However, considering the number
@@ -181,7 +181,7 @@ that saves us a loop of 13 cycles to compute the perfect hash.
 
 If the hand contains no more than 7 cards, we can now immediately return the
 value of the flush as a final result. Otherwise, we still need to go through the
-nonflush branch, and compare both results.
+non-flush branch, and compare both results.
 
 We will discuss how to evaluate the quinary in the next chapter.
 
