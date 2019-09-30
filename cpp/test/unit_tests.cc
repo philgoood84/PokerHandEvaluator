@@ -115,11 +115,56 @@ void TestSevenCards()
   std::printf("Tested %d hands in total\n", count);
 }
 
+void TestEightCards()
+{
+  int count = 0;
+
+  std::printf("Start testing eight cards\n");
+
+  for(int a = 0; a < 45; a ++)
+  {
+    for(int b = a + 1; b < 46; b++)
+    {
+      for(int c = b + 1; c < 47; c++)
+      {
+        for(int d = c + 1; d < 48; d++)
+        {
+          for(int e = d + 1; e < 49; e++)
+          {
+            for(int f = e + 1; f < 50; f++)
+            {
+              for(int g = f + 1; g < 51; g++)
+              {
+                for(int h = g + 1; h < 52; h++)
+                {
+                  int ph_eval = evaluate_8cards(a, b, c, d, e, f, g, h);
+                  int ph_eval_cpp = EvaluateCards(a, b, c, d, e, f, g, h);
+                  int kev_eval = kev_eval_8cards(a, b, c, d, e, f, g, h);
+
+                  assert(ph_eval == kev_eval);
+                  assert(ph_eval_cpp == kev_eval);
+
+                  count++;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  std::printf("Complete testing eight cards. ");
+  std::printf("Tested %d hands in total\n", count);
+}
+
+
 int main(void)
 {
   TestFiveCards();
   TestSixCards();
   TestSevenCards();
+  TestEightCards();
   std::printf("All tests completed.\n");
 
   return 0;

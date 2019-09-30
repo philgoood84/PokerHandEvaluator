@@ -56,13 +56,14 @@ static short suitbit_by_id[52] = {
  * The rest of it represent the rank, ranged from 0-12.
  * 13 * 4 gives 52 ids.
  */
-int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
+int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
 {
-  int i;
   int suit_hash = 0;
   int suit_binary[4] = {0};
   unsigned char quinary[13] = {0};
   int hash;
+  int value_flush = 10000;
+  int value_noflush = 10000;
 
   suit_hash += suitbit_by_id[a];
   suit_hash += suitbit_by_id[b];
@@ -71,6 +72,7 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
   suit_hash += suitbit_by_id[e];
   suit_hash += suitbit_by_id[f];
   suit_hash += suitbit_by_id[g];
+  suit_hash += suitbit_by_id[h];
 
   if (suits[suit_hash])
   {
@@ -81,8 +83,9 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
     suit_binary[e & 0x3] |= binaries_by_id[e];
     suit_binary[f & 0x3] |= binaries_by_id[f];
     suit_binary[g & 0x3] |= binaries_by_id[g];
+    suit_binary[h & 0x3] |= binaries_by_id[h];
 
-    return flush[suit_binary[suits[suit_hash]-1]];
+    value_flush = flush[suit_binary[suits[suit_hash]-1]];
   }
 
   quinary[(a >> 2)]++;
@@ -92,9 +95,15 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g)
   quinary[(e >> 2)]++;
   quinary[(f >> 2)]++;
   quinary[(g >> 2)]++;
+  quinary[(h >> 2)]++;
 
-  hash = hash_quinary(quinary, 13, 7);
+  hash = hash_quinary(quinary, 13, 8);
 
-  return noflush7[hash];
+  value_noflush = noflush8[hash];
+
+  if (value_flush < value_noflush)
+    return value_flush;
+  else
+    return value_noflush;
 }
 
