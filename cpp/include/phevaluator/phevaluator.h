@@ -63,6 +63,7 @@ int evaluate_5cards(int a, int b, int c, int d, int e);
 int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h);
+int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int i);
 
 #ifdef __cplusplus
 } // closing brace for extern "C"
@@ -88,6 +89,10 @@ int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g) {
 
 int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g, Card h) {
   return evaluate_8cards(a, b, c, d, e, f, g, h);
+}
+
+int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g, Card h, Card i) {
+  return evaluate_9cards(a, b, c, d, e, f, g, h, i);
 }
 
 } // namespace phevaluator
