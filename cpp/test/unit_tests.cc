@@ -5,9 +5,15 @@
 
 using namespace phevaluator;
 
+int percentage(long long numerator, long long denominator) {
+  return numerator * 100 / denominator;
+}
+
 void TestFiveCards()
 {
   int count = 0;
+  int progress = 0;
+  const int total = 2598960;
 
   std::printf("Start testing five cards\n");
 
@@ -21,26 +27,33 @@ void TestFiveCards()
         {
           for(int e = d + 1; e < 52; e++)
           {
-            int ph_eval = evaluate_5cards(a, b, c, d, e); // C method
-            int ph_eval_cpp = EvaluateCards(a, b, c, d, e); // C++ method
+            int ph_eval = EvaluateCards(a, b, c, d, e); // C++ method
             int kev_eval = kev_eval_5cards(a, b, c, d, e); // Kev's method
 
             assert(ph_eval == kev_eval);
-            assert(ph_eval_cpp == kev_eval);
 
             count++;
+
+            if (percentage(count, total) > progress) {
+              progress = percentage(count, total);
+              if (progress % 10 == 0) {
+                std::printf("Test progress: %d%%\n", progress);
+              }
+            }
           }
         }
       }
     }
   }
 
-  std::printf("Complete testing five cards. ");
+  std::printf("Complete testing five cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
 void TestSixCards() {
   int count = 0;
+  int progress = 0;
+  const int total = 20358520;
 
   std::printf("Start testing six cards\n");
 
@@ -57,13 +70,18 @@ void TestSixCards() {
             for(int f = e + 1; f < 52; f++)
             {
               int ph_eval = evaluate_6cards(a, b, c, d, e, f); // C method
-              int ph_eval_cpp = EvaluateCards(a, b, c, d, e, f); // C++ method
               int kev_eval = kev_eval_6cards(a, b, c, d, e, f); // Kev's method
 
               assert(ph_eval == kev_eval);
-              assert(ph_eval_cpp == kev_eval);
 
               count++;
+
+              if (percentage(count, total) > progress) {
+                progress = percentage(count, total);
+                if (progress % 10 == 0) {
+                  std::printf("Test progress: %d%%\n", progress);
+                }
+              }
             }
           }
         }
@@ -71,13 +89,15 @@ void TestSixCards() {
     }
   }
 
-  std::printf("Complete testing six cards. ");
+  std::printf("Complete testing six cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
 void TestSevenCards()
 {
   int count = 0;
+  int progress = 0;
+  const int total = 133784560;
 
   std::printf("Start testing seven cards\n");
 
@@ -95,14 +115,19 @@ void TestSevenCards()
             {
               for(int g = f + 1; g < 52; g++)
               {
-                int ph_eval = evaluate_7cards(a, b, c, d, e, f, g);
-                int ph_eval_cpp = EvaluateCards(a, b, c, d, e, f, g);
+                int ph_eval = EvaluateCards(a, b, c, d, e, f, g);
                 int kev_eval = kev_eval_7cards(a, b, c, d, e, f, g);
 
                 assert(ph_eval == kev_eval);
-                assert(ph_eval_cpp == kev_eval);
 
                 count++;
+
+                if (percentage(count, total) > progress) {
+                  progress = percentage(count, total);
+                  if (progress % 10 == 0) {
+                    std::printf("Test progress: %d%%\n", progress);
+                  }
+                }
               }
             }
           }
@@ -111,13 +136,15 @@ void TestSevenCards()
     }
   }
 
-  std::printf("Complete testing seven cards. ");
+  std::printf("Complete testing seven cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
 void TestEightCards()
 {
   int count = 0;
+  int progress = 0;
+  const int total = 752538150;
 
   std::printf("Start testing eight cards\n");
 
@@ -137,14 +164,19 @@ void TestEightCards()
               {
                 for(int h = g + 1; h < 52; h++)
                 {
-                  int ph_eval = evaluate_8cards(a, b, c, d, e, f, g, h);
-                  int ph_eval_cpp = EvaluateCards(a, b, c, d, e, f, g, h);
+                  int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h);
                   int kev_eval = kev_eval_8cards(a, b, c, d, e, f, g, h);
 
                   assert(ph_eval == kev_eval);
-                  assert(ph_eval_cpp == kev_eval);
 
                   count++;
+
+                  if (percentage(count, total) > progress) {
+                    progress = percentage(count, total);
+                    if (progress % 10 == 0) {
+                      std::printf("Test progress: %d%%\n", progress);
+                    }
+                  }
                 }
               }
             }
@@ -154,13 +186,15 @@ void TestEightCards()
     }
   }
 
-  std::printf("Complete testing eight cards. ");
+  std::printf("Complete testing eight cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
 void TestNineCards()
 {
-  int count = 0;
+  long long count = 0;
+  int progress = 0;
+  const long long total = 3679075400;
 
   std::printf("Start testing nine cards\n");
 
@@ -182,14 +216,19 @@ void TestNineCards()
                 {
                   for(int i = h + 1; i < 52; i++)
                   {
-                    int ph_eval = evaluate_9cards(a, b, c, d, e, f, g, h, i);
-                    int ph_eval_cpp = EvaluateCards(a, b, c, d, e, f, g, h, i);
+                    int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h, i);
                     int kev_eval = kev_eval_9cards(a, b, c, d, e, f, g, h, i);
 
                     assert(ph_eval == kev_eval);
-                    assert(ph_eval_cpp == kev_eval);
 
                     count++;
+
+                    if (percentage(count, total) > progress) {
+                      progress = percentage(count, total);
+                      if (progress % 10 == 0) {
+                        std::printf("Test progress: %d%%\n", progress);
+                      }
+                    }
                   }
                 }
               }
@@ -200,8 +239,8 @@ void TestNineCards()
     }
   }
 
-  std::printf("Complete testing nine cards. ");
-  std::printf("Tested %d hands in total\n", count);
+  std::printf("Complete testing nine cards.\n");
+  std::printf("Tested %lld hands in total\n", count);
 }
 
 int main(void)
