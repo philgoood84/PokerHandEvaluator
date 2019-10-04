@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cassert>
+#include <algorithm>
 #include "phevaluator/phevaluator.h"
 #include "kev/kev_eval.h"
 
@@ -165,9 +166,19 @@ void TestEightCards()
                 for(int h = g + 1; h < 52; h++)
                 {
                   int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h);
-                  int kev_eval = kev_eval_8cards(a, b, c, d, e, f, g, h);
 
-                  assert(ph_eval == kev_eval);
+                  int best_seven = 10000;
+                  
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, h));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, h, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, h, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, h, e, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, h, d, e, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, h, c, d, e, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(h, b, c, d, e, f, g));
+
+                  assert(ph_eval == best_seven);
 
                   count++;
 
@@ -217,9 +228,20 @@ void TestNineCards()
                   for(int i = h + 1; i < 52; i++)
                   {
                     int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h, i);
-                    int kev_eval = kev_eval_9cards(a, b, c, d, e, f, g, h, i);
 
-                    assert(ph_eval == kev_eval);
+                    int best_eight = 10000;
+                    
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, i));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, i, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, i, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, i, f, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, i, e, f, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, b, i, d, e, f, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(a, i, c, d, e, f, g, h));
+                    best_eight = std::min(best_eight, EvaluateCards(i, b, c, d, e, f, g, h));
+
+                    assert(ph_eval == best_eight);
 
                     count++;
 
