@@ -29,12 +29,13 @@ considerably small memory (~100kb for the 7 card evaluation).
 
 ## Algorithm
 
-The [documentation](Documentation/Algorithm.md) has the description of the
+This [documentation](Documentation/Algorithm.md) has the description of the
 underlying algorithm.
 
 ## C/C++ Implementation
 
-The [cpp](cpp) subdirectory has the C/C++ implementation of the algorithm.
+The [cpp](cpp) subdirectory has the C/C++ implementation of the algorithm,
+offering evaluation from 5-card hands to 9-card hands.
 
 ## Other Implementations
 
