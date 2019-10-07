@@ -1,4 +1,8 @@
 language: cpp
 script:
   - cd cpp
-  - make test
+  - mkdir -p build
+  - cd build
+  - cmake ..
+  - make
+  - ./unit_tests
