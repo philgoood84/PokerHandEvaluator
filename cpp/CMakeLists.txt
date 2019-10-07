@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.2)
+cmake_minimum_required(VERSION 2.8.11)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -25,12 +25,32 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
 
-# The gtest/gtest_main targets carry header search path
-# dependencies automatically when using CMake 2.8.11 or
-# later. Otherwise we have to add them here ourselves.
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include_directories("${gtest_SOURCE_DIR}/include")
+configure_file(CMakeLists.txt.in googlebenchmark-download/CMakeLists.txt)
+# executing the configuration step
+execute_process(
+    COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+    RESULT_VARIABLE results
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-download
+)
+# checking if the configuration step passed
+if(results)
+    message(FATAL_ERROR "Configuration step for Benchmark has Failed. ${results}")
 endif()
+# executing the build step
+execute_process(
+    COMMAND ${CMAKE_COMMAND} --build . --config Release
+    RESULT_VARIABLE results
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-download
+)
+# checking if the build step passed
+if(results)
+    message(FATAL_ERROR "Build step for Benchmark has Failed. ${results}")
+endif()
+add_subdirectory(
+    ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-src
+    ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build
+    EXCLUDE_FROM_ALL
+)
 
 # Use C++ 11 Standard to compile
 set(CMAKE_CXX_STANDARD 11)
@@ -58,6 +78,10 @@ add_executable(unit_tests
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )
+add_executable(benchmark_phevaluator
+  benchmark/benchmark.cc
+)
 target_compile_options(unit_tests PUBLIC -Ofast)
 target_link_libraries(unit_tests gtest_main pheval)
+target_link_libraries(benchmark_phevaluator benchmark pheval)
 add_test(NAME unit_tests COMMAND unit_tests)
