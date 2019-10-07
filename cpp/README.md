@@ -2,22 +2,34 @@
 
 ## Compile and test
 
-Run `make` to build the `unit_tests` binaray.
+This library can be built using CMake. A recommended way of building it is:
 
-Run `make test` to build the unit test and run it.
+```
+mkdir -p build
+cd build
+cmake ..
+make
+```
 
-Run `make libpheval.a` to build the library only.
+This will generate a dynamic linked library `libpheval.dylib`, as well as
+a unit test binary `unit_tests`.
+
+Run the `unit_tests` to perform the unit tests:
+
+```
+./unit_tests
+```
 
 ## Use the library
 
-After building the library `libpheval.a`, you can add the `./include`
+After building the library `libpheval.dylib`, you can add the `./include`
 directory to your includes path, and link the library to your source
 code. In addition, at least C++11 standard is required.
 
 For example:
 
 ```bash
-g++ -I include/ -std=c++11 libpheval.a your_source_code.cc your_binary
+g++ -I include/ -std=c++11 libpheval.dylib your_source_code.cc your_binary
 ```
 
 ### C methods
