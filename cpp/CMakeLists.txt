@@ -36,7 +36,6 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 
 # Now simply link against gtest or gtest_main as needed. Eg
-include_directories(include)
 add_library(pheval SHARED
   src/dptables.c
   src/evaluator5.c
@@ -52,6 +51,7 @@ add_library(pheval SHARED
   src/hashtable8.c
   src/hashtable9.c
 )
+target_include_directories(pheval PUBLIC include) 
 target_compile_options(pheval PUBLIC -Ofast)
 add_executable(unit_tests
   test/unit_tests.cc
