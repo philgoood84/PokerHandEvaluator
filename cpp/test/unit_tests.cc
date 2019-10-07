@@ -2,6 +2,7 @@
 #include <cassert>
 #include <algorithm>
 #include "phevaluator/phevaluator.h"
+#include "gtest/gtest.h"
 #include "kev/kev_eval.h"
 
 using namespace phevaluator;
@@ -10,13 +11,12 @@ int percentage(long long numerator, long long denominator) {
   return numerator * 100 / denominator;
 }
 
-void TestFiveCards()
-{
+TEST(CorrectnessTest, TestFiveCardHands) {
   int count = 0;
   int progress = 0;
   const int total = 2598960;
 
-  std::printf("Start testing five cards\n");
+  std::printf("Start testing five-card hands\n");
 
   for(int a = 0; a < 48; a++)
   {
@@ -47,16 +47,16 @@ void TestFiveCards()
     }
   }
 
-  std::printf("Complete testing five cards.\n");
+  std::printf("Complete testing five-card handss.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-void TestSixCards() {
+TEST(CorrectnessTest, TestSixCardHands) {
   int count = 0;
   int progress = 0;
   const int total = 20358520;
 
-  std::printf("Start testing six cards\n");
+  std::printf("Start testing six-card hands\n");
 
   for(int a = 0; a < 47; a++)
   {
@@ -70,7 +70,7 @@ void TestSixCards() {
           {
             for(int f = e + 1; f < 52; f++)
             {
-              int ph_eval = evaluate_6cards(a, b, c, d, e, f); // C method
+              int ph_eval = EvaluateCards(a, b, c, d, e, f); // C++ method
               int kev_eval = kev_eval_6cards(a, b, c, d, e, f); // Kev's method
 
               assert(ph_eval == kev_eval);
@@ -90,17 +90,16 @@ void TestSixCards() {
     }
   }
 
-  std::printf("Complete testing six cards.\n");
+  std::printf("Complete testing six-card hands.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-void TestSevenCards()
-{
+TEST(CorrectnessTest, TestSevenCardHands) {
   int count = 0;
   int progress = 0;
   const int total = 133784560;
 
-  std::printf("Start testing seven cards\n");
+  std::printf("Start testing seven-card hands\n");
 
   for(int a = 0; a < 46; a ++)
   {
@@ -137,17 +136,16 @@ void TestSevenCards()
     }
   }
 
-  std::printf("Complete testing seven cards.\n");
+  std::printf("Complete testing seven-card hands.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-void TestEightCards()
-{
+TEST(CorrectnessTest, TestEightCardHands) {
   int count = 0;
   int progress = 0;
   const int total = 752538150;
 
-  std::printf("Start testing eight cards\n");
+  std::printf("Start testing eight-card hands\n");
 
   for(int a = 0; a < 45; a ++)
   {
@@ -167,8 +165,9 @@ void TestEightCards()
                 {
                   int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h);
 
+                  // Compared with the best hand from 7-card evaluator
                   int best_seven = 10000;
-                  
+
                   best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, g));
                   best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, h));
                   best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, h, g));
@@ -197,17 +196,16 @@ void TestEightCards()
     }
   }
 
-  std::printf("Complete testing eight cards.\n");
+  std::printf("Complete testing eight-card hands.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-void TestNineCards()
-{
+TEST(CorrectnessTest, TestNineCardHands) {
   long long count = 0;
   int progress = 0;
   const long long total = 3679075400;
 
-  std::printf("Start testing nine cards\n");
+  std::printf("Start testing nine-card hands\n");
 
   for(int a = 0; a < 44; a ++)
   {
@@ -229,8 +227,9 @@ void TestNineCards()
                   {
                     int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h, i);
 
+                    // Compared with the best hand from the 8-card evaluator
                     int best_eight = 10000;
-                    
+
                     best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, h));
                     best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, i));
                     best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, i, h));
@@ -261,18 +260,7 @@ void TestNineCards()
     }
   }
 
-  std::printf("Complete testing nine cards.\n");
+  std::printf("Complete testing nine-card hands\n");
   std::printf("Tested %lld hands in total\n", count);
 }
 
-int main(void)
-{
-  TestFiveCards();
-  TestSixCards();
-  TestSevenCards();
-  TestEightCards();
-  TestNineCards();
-  std::printf("All tests completed.\n");
-
-  return 0;
-}

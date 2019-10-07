@@ -52,10 +52,12 @@ add_library(pheval SHARED
   src/hashtable8.c
   src/hashtable9.c
 )
+target_compile_options(pheval PUBLIC -Ofast)
 add_executable(unit_tests
   test/unit_tests.cc
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )
+target_compile_options(unit_tests PUBLIC -Ofast)
 target_link_libraries(unit_tests gtest_main pheval)
 add_test(NAME unit_tests COMMAND unit_tests)
