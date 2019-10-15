@@ -56,13 +56,8 @@ static short suitbit_by_id[52] = {
  * The rest of it represent the rank, ranged from 0-12.
  * 13 * 4 gives 52 ids.
  */
-int evaluate_5cards(int a, int b, int c, int d, int e)
-{
-  int i;
+int evaluate_5cards(int a, int b, int c, int d, int e) {
   int suit_hash = 0;
-  int suit_binary[4] = {0};
-  unsigned char quinary[13] = {0};
-  int hash;
 
   suit_hash += suitbit_by_id[a];
   suit_hash += suitbit_by_id[b];
@@ -72,6 +67,8 @@ int evaluate_5cards(int a, int b, int c, int d, int e)
 
   if (suits[suit_hash])
   {
+    int suit_binary[4] = {0};
+
     suit_binary[a & 0x3] |= binaries_by_id[a];
     suit_binary[b & 0x3] |= binaries_by_id[b];
     suit_binary[c & 0x3] |= binaries_by_id[c];
@@ -81,13 +78,15 @@ int evaluate_5cards(int a, int b, int c, int d, int e)
     return flush[suit_binary[suits[suit_hash]-1]];
   }
 
+  unsigned char quinary[13] = {0};
+
   quinary[(a >> 2)]++;
   quinary[(b >> 2)]++;
   quinary[(c >> 2)]++;
   quinary[(d >> 2)]++;
   quinary[(e >> 2)]++;
 
-  hash = hash_quinary(quinary, 13, 5);
+  const int hash = hash_quinary(quinary, 13, 5);
 
   return noflush5[hash];
 }

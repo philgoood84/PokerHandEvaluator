@@ -56,29 +56,20 @@ static short suitbit_by_id[52] = {
  * The rest of it represent the rank, ranged from 0-12.
  * 13 * 4 gives 52 ids.
  */
-int evaluate_6cards(int a, int b, int c, int d, int e, int f)
-{
-  int i;
+int evaluate_6cards(int a, int b, int c, int d, int e, int f) {
   int suit_hash = 0;
-  int suit_binary[4] = {0};
-  unsigned char quinary[13] = {0};
-  int hash;
 
   suit_hash += suitbit_by_id[a];
-  quinary[(a >> 2)]++;
   suit_hash += suitbit_by_id[b];
-  quinary[(b >> 2)]++;
   suit_hash += suitbit_by_id[c];
-  quinary[(c >> 2)]++;
   suit_hash += suitbit_by_id[d];
-  quinary[(d >> 2)]++;
   suit_hash += suitbit_by_id[e];
-  quinary[(e >> 2)]++;
   suit_hash += suitbit_by_id[f];
-  quinary[(f >> 2)]++;
 
   if (suits[suit_hash])
   {
+    int suit_binary[4] = {0};
+
     suit_binary[a & 0x3] |= binaries_by_id[a];
     suit_binary[b & 0x3] |= binaries_by_id[b];
     suit_binary[c & 0x3] |= binaries_by_id[c];
@@ -89,7 +80,15 @@ int evaluate_6cards(int a, int b, int c, int d, int e, int f)
     return flush[suit_binary[suits[suit_hash]-1]];
   }
 
-  hash = hash_quinary(quinary, 13, 6);
+  unsigned char quinary[13] = {0};
+  quinary[(a >> 2)]++;
+  quinary[(b >> 2)]++;
+  quinary[(c >> 2)]++;
+  quinary[(d >> 2)]++;
+  quinary[(e >> 2)]++;
+  quinary[(f >> 2)]++;
+
+  const int hash = hash_quinary(quinary, 13, 6);
 
   return noflush6[hash];
 }

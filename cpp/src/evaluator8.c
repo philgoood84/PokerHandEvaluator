@@ -59,9 +59,6 @@ static short suitbit_by_id[52] = {
 int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
 {
   int suit_hash = 0;
-  int suit_binary[4] = {0};
-  unsigned char quinary[13] = {0};
-  int hash;
   int value_flush = 10000;
   int value_noflush = 10000;
 
@@ -76,6 +73,7 @@ int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
 
   if (suits[suit_hash])
   {
+    int suit_binary[4] = {0};
     suit_binary[a & 0x3] |= binaries_by_id[a];
     suit_binary[b & 0x3] |= binaries_by_id[b];
     suit_binary[c & 0x3] |= binaries_by_id[c];
@@ -88,6 +86,7 @@ int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
     value_flush = flush[suit_binary[suits[suit_hash]-1]];
   }
 
+  unsigned char quinary[13] = {0};
   quinary[(a >> 2)]++;
   quinary[(b >> 2)]++;
   quinary[(c >> 2)]++;
@@ -97,7 +96,7 @@ int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
   quinary[(g >> 2)]++;
   quinary[(h >> 2)]++;
 
-  hash = hash_quinary(quinary, 13, 8);
+  const int hash = hash_quinary(quinary, 13, 8);
 
   value_noflush = noflush8[hash];
 

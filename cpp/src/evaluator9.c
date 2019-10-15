@@ -58,9 +58,6 @@ static short suitbit_by_id[52] = {
  */
 int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int i)
 {
-  int suit_binary[4] = {0};
-  unsigned char quinary[13] = {0};
-  int hash;
   int value_flush = 10000;
   int value_noflush = 10000;
   int suit_counter[4] = {0};
@@ -77,6 +74,7 @@ int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int 
 
   for (int l = 0; l < 4; l++) {
     if (suit_counter[l] >= 5) {
+      int suit_binary[4] = {0};
       suit_binary[a & 0x3] |= binaries_by_id[a];
       suit_binary[b & 0x3] |= binaries_by_id[b];
       suit_binary[c & 0x3] |= binaries_by_id[c];
@@ -93,6 +91,7 @@ int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int 
     }
   }
 
+  unsigned char quinary[13] = {0};
   quinary[(a >> 2)]++;
   quinary[(b >> 2)]++;
   quinary[(c >> 2)]++;
@@ -103,7 +102,7 @@ int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int 
   quinary[(h >> 2)]++;
   quinary[(i >> 2)]++;
 
-  hash = hash_quinary(quinary, 13, 9);
+  const int hash = hash_quinary(quinary, 13, 9);
 
   value_noflush = noflush9[hash];
 
