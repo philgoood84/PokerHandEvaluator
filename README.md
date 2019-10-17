@@ -15,11 +15,11 @@ Cactus Kev once gave [an answer](http://suffe.cool/poker/evaluator.html) for
 a five card poker hand evaluation. With smart encoding, it ranks each hand
 to 7462 distinct values.
 
-Still, Kev's solution is specific for a five-card hand. To evaluate a seven-
-card poker hand (which is more popular because of Texas Hold'em) using Kev's
-algorithm, one brute force solution is to iterate all 7 choose 5 combination,
-running his 5 card evaluation algorithm 21 times to find the best answer,
-which is apparently too time-inefficient.
+Still, Kev's solution is specific for a five-card hand. To evaluate a
+seven-card poker hand (which is more popular because of Texas Hold'em) using
+Kev's algorithm, one brute force solution is to iterate all 7 choose 5
+combination, running his five-card evaluation algorithm 21 times to find the
+best answer, which is apparently too time-inefficient.
 
 [PH Evaluator](https://github.com/HenryRLee/PokerHandEvaluator) is designed
 for evaluating poker hands with more than 5 cards. Instead of traversing all
