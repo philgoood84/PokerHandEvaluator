@@ -275,7 +275,7 @@ Now the iteration for the rest of the entries:
 
 ```
   for each l in [2, 4] and i in [1, 13] and j in [0, 7]:
-    dp[l][i][j] = dp[l-1][i][j] + dp[1][i][j-l]
+    dp[l][i][j] = dp[l-1][i][j] + dp[1][i][j-l+1]
 ```
 
 For example `dp[4][4][5]`, which is equivalent to the number of valid
