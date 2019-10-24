@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
+set(CMAKE_BUILD_TYPE  "Release")
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -71,7 +72,7 @@ add_library(pheval SHARED
   src/hashtable8.c
   src/hashtable9.c
 )
-target_include_directories(pheval PUBLIC include) 
+target_include_directories(pheval PUBLIC include)
 target_compile_options(pheval PUBLIC -Ofast)
 add_executable(unit_tests
   test/unit_tests.cc
