@@ -11,12 +11,12 @@ int percentage(long long numerator, long long denominator) {
   return numerator * 100 / denominator;
 }
 
-TEST(CorrectnessTest, TestFiveCardHands) {
+TEST(CorrectnessTest, TestFiveCards) {
   int count = 0;
   int progress = 0;
   const int total = 2598960;
 
-  std::printf("Start testing five-card hands\n");
+  std::printf("Start testing five cards\n");
 
   for(int a = 0; a < 48; a++)
   {
@@ -33,6 +33,10 @@ TEST(CorrectnessTest, TestFiveCardHands) {
 
             assert(ph_eval == kev_eval);
 
+            Hand hand({a, b, c, d, e});
+            int ph_hand_eval = EvaluateHand(hand);
+            assert(ph_hand_eval == kev_eval);
+
             count++;
 
             if (percentage(count, total) > progress) {
@@ -47,16 +51,16 @@ TEST(CorrectnessTest, TestFiveCardHands) {
     }
   }
 
-  std::printf("Complete testing five-card handss.\n");
+  std::printf("Complete testing five cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestSixCardHands) {
+TEST(CorrectnessTest, TestSixCards) {
   int count = 0;
   int progress = 0;
   const int total = 20358520;
 
-  std::printf("Start testing six-card hands\n");
+  std::printf("Start testing six cards\n");
 
   for(int a = 0; a < 47; a++)
   {
@@ -75,6 +79,10 @@ TEST(CorrectnessTest, TestSixCardHands) {
 
               assert(ph_eval == kev_eval);
 
+              Hand hand({a, b, c, d, e, f});
+              int ph_hand_eval = EvaluateHand(hand);
+              assert(ph_hand_eval == kev_eval);
+
               count++;
 
               if (percentage(count, total) > progress) {
@@ -90,16 +98,16 @@ TEST(CorrectnessTest, TestSixCardHands) {
     }
   }
 
-  std::printf("Complete testing six-card hands.\n");
+  std::printf("Complete testing six cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestSevenCardHands) {
+TEST(CorrectnessTest, TestSevenCards) {
   int count = 0;
   int progress = 0;
   const int total = 133784560;
 
-  std::printf("Start testing seven-card hands\n");
+  std::printf("Start testing seven cards\n");
 
   for(int a = 0; a < 46; a ++)
   {
@@ -120,6 +128,10 @@ TEST(CorrectnessTest, TestSevenCardHands) {
 
                 assert(ph_eval == kev_eval);
 
+                Hand hand({a, b, c, d, e, f, g});
+                int ph_hand_eval = EvaluateHand(hand);
+                assert(ph_hand_eval == kev_eval);
+
                 count++;
 
                 if (percentage(count, total) > progress) {
@@ -136,16 +148,16 @@ TEST(CorrectnessTest, TestSevenCardHands) {
     }
   }
 
-  std::printf("Complete testing seven-card hands.\n");
+  std::printf("Complete testing seven cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestEightCardHands) {
+TEST(CorrectnessTest, TestEightCards) {
   int count = 0;
   int progress = 0;
   const int total = 752538150;
 
-  std::printf("Start testing eight-card hands\n");
+  std::printf("Start testing eight cards\n");
 
   for(int a = 0; a < 45; a ++)
   {
@@ -179,6 +191,10 @@ TEST(CorrectnessTest, TestEightCardHands) {
 
                   assert(ph_eval == best_seven);
 
+                  Hand hand({a, b, c, d, e, f, g, h});
+                  int ph_hand_eval = EvaluateHand(hand);
+                  assert(ph_hand_eval == kev_eval);
+
                   count++;
 
                   if (percentage(count, total) > progress) {
@@ -196,16 +212,16 @@ TEST(CorrectnessTest, TestEightCardHands) {
     }
   }
 
-  std::printf("Complete testing eight-card hands.\n");
+  std::printf("Complete testing eight cards.\n");
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestNineCardHands) {
+TEST(CorrectnessTest, TestNineCards) {
   long long count = 0;
   int progress = 0;
   const long long total = 3679075400;
 
-  std::printf("Start testing nine-card hands\n");
+  std::printf("Start testing nine cards\n");
 
   for(int a = 0; a < 44; a ++)
   {
@@ -242,6 +258,10 @@ TEST(CorrectnessTest, TestNineCardHands) {
 
                     assert(ph_eval == best_eight);
 
+                    Hand hand({a, b, c, d, e, f, g, h, i});
+                    int ph_hand_eval = EvaluateHand(hand);
+                    assert(ph_hand_eval == kev_eval);
+
                     count++;
 
                     if (percentage(count, total) > progress) {
@@ -260,7 +280,7 @@ TEST(CorrectnessTest, TestNineCardHands) {
     }
   }
 
-  std::printf("Complete testing nine-card hands\n");
+  std::printf("Complete testing nine cards\n");
   std::printf("Tested %lld hands in total\n", count);
 }
 

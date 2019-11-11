@@ -69,6 +69,7 @@ add_library(pheval SHARED
   src/evaluator8.c
   src/evaluator9.c
   src/hash.c
+  src/hand.cc
   src/hashtable.c
   src/hashtable5.c
   src/hashtable6.c
