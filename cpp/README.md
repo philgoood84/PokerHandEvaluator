@@ -29,7 +29,7 @@ code. In addition, at least C++11 standard is required.
 For example:
 
 ```bash
-g++ -I include/ -std=c++11 libpheval.dylib your_source_code.cc your_binary
+g++ -I include/ -std=c++11 libpheval.dylib your_source_code.cc -o your_binary
 ```
 
 In the [examples](examples) directory, there is a small example on how to
