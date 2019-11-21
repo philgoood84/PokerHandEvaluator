@@ -28,8 +28,8 @@ class Hand {
  private:
   unsigned char size_ = 0;
   int suitHash_ = 0;
-  std::array<int, 4> suitBinary_{0};
-  std::array<unsigned char, 13> quinary_{0};
+  std::array<int, 4> suitBinary_{{0}};
+  std::array<unsigned char, 13> quinary_{{0}};
 };
 
 } // namespace phevaluator
