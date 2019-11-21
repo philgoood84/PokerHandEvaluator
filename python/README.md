@@ -12,10 +12,23 @@ pip install -r requirements.txt
 There are 1000 random examples tested for each type of hand (5 cards, 6 cards, 7 cards, 8 cards and 9 cards). The examples are stored in json files the tests folder and were generated with the original C++ evaluator.
 
 
-To run the tests:
+To run the unit test:
+
 ```
 cd phevaluator
 python -m unittest tests.test_evaluator
+```
+
+There are also test code for testing the hash tables
+```
+cd phevaluator
+python -m table_tests.test_dptables
+python -m table_tests.test_hashtable
+python -m table_tests.test_hashtable5
+python -m table_tests.test_hashtable6
+python -m table_tests.test_hashtable7
+python -m table_tests.test_hashtable8
+python -m table_tests.test_hashtable9
 ```
 
 ## Using the library

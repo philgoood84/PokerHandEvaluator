@@ -1,10 +1,10 @@
 import unittest
 
-from src.hash import hash_quinary
-from src.hashtable5 import NOFLUSH5
+from evaluator.hash import hash_quinary
+from evaluator.hashtable5 import NO_FLUSH_5
 
 
-class BaseTestNoFLushTable(unittest.TestCase):
+class BaseTestNoFlushTable(unittest.TestCase):
   TABLE = NotImplementedError
   VISIT = NotImplementedError
   UPDATED = False
@@ -50,12 +50,14 @@ class BaseTestNoFLushTable(unittest.TestCase):
       base_idx = 0
       for i in range(len(ks)):
         base_idx += (10 ** base[i]) * ks[i]
-      base_rank = NOFLUSH5[hash_quinary(base_idx, 13, 5)]
+      hand = list(map(int, reversed("{:013d}".format(base_idx))))
+      base_rank = NO_FLUSH_5[hash_quinary(hand, 13, 5)]
       for additional in additionals:
         idx = base_idx
         for i in additional:
           idx += 10 ** i
-        hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+        hand = list(map(int, reversed("{:013d}".format(idx))))
+        hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
         if self.VISIT[hash_] > 0:
           continue
         self.TABLE[hash_] = base_rank
@@ -89,7 +91,8 @@ class BaseTestNoFLushTable(unittest.TestCase):
       for pos in base:
         base_idx += (10 ** pos)
         self.USED[pos] = 1
-      base_rank = NOFLUSH5[hash_quinary(base_idx, 13, 5)]
+      hand = list(map(int, reversed("{:013d}".format(base_idx))))
+      base_rank = NO_FLUSH_5[hash_quinary(hand, 13, 5)]
       self.get_additional(self.NUM_CARDS - 5)
       additionals = self.QUINARIES_ADDITIONAL[:]
       self.QUINARIES_ADDITIONAL = []
@@ -98,7 +101,8 @@ class BaseTestNoFLushTable(unittest.TestCase):
         idx = base_idx
         for i in additional:
           idx += 10 ** i
-        hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+        hand = list(map(int, reversed("{:013d}".format(idx))))
+        hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
         if self.VISIT[hash_] > 0:
           continue
         self.TABLE[hash_] = base_rank

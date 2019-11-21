@@ -1,12 +1,12 @@
 import unittest
 
-from src.hash import hash_quinary
-from src.hashtable5 import *
+from evaluator.hash import hash_quinary
+from evaluator.hashtable5 import *
 
 
 class TestNoFlush5Table(unittest.TestCase):
-  TABLE = [0] * len(NOFLUSH5)
-  VISIT = [0] * len(NOFLUSH5)
+  TABLE = [0] * len(NO_FLUSH_5)
+  VISIT = [0] * len(NO_FLUSH_5)
   UPDATED = False
   CUR_RANK = 1
   NUM_CARDS = 5
@@ -35,7 +35,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx = 0
       idx += (10 ** base[0]) * 4
       idx += 10 ** base[1]
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       self.TABLE[hash_] = self.CUR_RANK
       self.VISIT[hash_] = 1
       self.CUR_RANK += 1
@@ -48,7 +49,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx = 0
       idx += (10 ** base[0]) * 3
       idx += (10 ** base[1]) * 2
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       self.TABLE[hash_] = self.CUR_RANK
       self.VISIT[hash_] = 1
       self.CUR_RANK += 1
@@ -62,7 +64,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx = 0
       for pos in base:
         idx += (10 ** pos)
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       self.TABLE[hash_] = self.CUR_RANK
       self.VISIT[hash_] = 1
       self.CUR_RANK += 1
@@ -72,7 +75,8 @@ class TestNoFlush5Table(unittest.TestCase):
     idx = 0
     for pos in base:
       idx += (10 ** pos)
-    hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+    hand = list(map(int, reversed("{:013d}".format(idx))))
+    hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
     self.TABLE[hash_] = self.CUR_RANK
     self.VISIT[hash_] = 1
     self.CUR_RANK += 1
@@ -84,7 +88,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx += (10 ** base[0]) * 3
       idx += (10 ** base[1])
       idx += (10 ** base[2])
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       if self.VISIT[hash_] == 0:
         self.TABLE[hash_] = self.CUR_RANK
         self.VISIT[hash_] = 1
@@ -99,7 +104,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx += (10 ** base[0]) * 2
       idx += (10 ** base[1]) * 2
       idx += (10 ** base[2])
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       if self.VISIT[hash_] == 0:
         self.TABLE[hash_] = self.CUR_RANK
         self.VISIT[hash_] = 1
@@ -115,7 +121,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx += (10 ** base[1])
       idx += (10 ** base[2])
       idx += (10 ** base[3])
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       if self.VISIT[hash_] == 0:
         self.TABLE[hash_] = self.CUR_RANK
         self.VISIT[hash_] = 1
@@ -132,7 +139,8 @@ class TestNoFlush5Table(unittest.TestCase):
       idx += (10 ** base[2])
       idx += (10 ** base[3])
       idx += (10 ** base[4])
-      hash_ = hash_quinary(idx, 13, self.NUM_CARDS)
+      hand = list(map(int, reversed("{:013d}".format(idx))))
+      hash_ = hash_quinary(hand, 13, self.NUM_CARDS)
       if self.VISIT[hash_] == 0:
         self.TABLE[hash_] = self.CUR_RANK
         self.VISIT[hash_] = 1
@@ -163,7 +171,7 @@ class TestNoFlush5Table(unittest.TestCase):
       self.UPDATED = True
 
   def test_noflush5_table(self):
-    self.assertListEqual(self.TABLE, NOFLUSH5)
+    self.assertListEqual(self.TABLE, NO_FLUSH_5)
 
 
 if __name__ == "__main__":

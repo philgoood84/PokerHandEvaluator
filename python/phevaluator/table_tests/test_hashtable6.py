@@ -1,11 +1,11 @@
 import unittest
 
-from test_tables.utils import BaseTestNoFLushTable
-from src.hashtable import *
+from table_tests.utils import BaseTestNoFlushTable
+from evaluator.hashtable6 import NO_FLUSH_6
 
 
-class TestNoFlush6Table(BaseTestNoFLushTable):
-  TOCOMPARE = NOFLUSH6
+class TestNoFlush6Table(BaseTestNoFlushTable):
+  TOCOMPARE = NO_FLUSH_6
   TABLE = [0] * len(TOCOMPARE)
   VISIT = [0] * len(TOCOMPARE)
   NUM_CARDS = 6

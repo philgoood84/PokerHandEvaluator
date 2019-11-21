@@ -1,11 +1,11 @@
 import unittest
 from itertools import combinations_with_replacement
 
-from src.dptables import *
+from evaluator.dptables import *
 
 
 class TestSuitsTable(unittest.TestCase):
-  TABLE = [0] * len(SUITS)
+  DP = [0] * len(SUITS)
   UPDATED = False
 
   def setUp(self):
@@ -32,16 +32,16 @@ class TestSuitsTable(unittest.TestCase):
 
     if not self.UPDATED:
       for k in [5, 6, 7, 8, 9]:
-        update_k(self.TABLE, k)
+        update_k(self.DP, k)
       self.UPDATED = True
 
   def test_suits_table(self):
-    self.assertListEqual(self.TABLE, SUITS)
+    self.assertListEqual(self.DP, SUITS)
 
 
 class TestChooseTable(unittest.TestCase):
 
-  TABLE = [[0] * len(CHOOSE[idx]) for idx in range(len(CHOOSE))]
+  DP = [[0] * len(CHOOSE[idx]) for idx in range(len(CHOOSE))]
   VISIT = [[0] * len(CHOOSE[idx]) for idx in range(len(CHOOSE))]
   UPDATED = False
 
@@ -49,13 +49,13 @@ class TestChooseTable(unittest.TestCase):
     if n < r:
       return 0
     elif r == 0:
-      self.TABLE[n][r] = 1
+      self.DP[n][r] = 1
       return 1
     else:
       if self.VISIT[n][r] == 0:
-        self.TABLE[n][r] = self.nCr(n-1, r) + self.nCr(n-1, r-1)
+        self.DP[n][r] = self.nCr(n-1, r) + self.nCr(n-1, r-1)
         self.VISIT[n][r] = 1
-      return self.TABLE[n][r]
+      return self.DP[n][r]
 
   def setUp(self):
     if not self.UPDATED:
@@ -65,11 +65,11 @@ class TestChooseTable(unittest.TestCase):
       self.UPDATED = True
 
   def test_choose_table(self):
-    self.assertListEqual(self.TABLE, CHOOSE)
+    self.assertListEqual(self.DP, CHOOSE)
 
 
 class TestDpTable(unittest.TestCase):
-  TABLE = [[[0] * len(DP[i][j]) for j in range(len(DP[i]))] for i in range(len(DP))]
+  DP = [[[0] * len(DP[i][j]) for j in range(len(DP[i]))] for i in range(len(DP))]
   UPDATED = False
 
   def fill_table(self):
@@ -90,20 +90,20 @@ class TestDpTable(unittest.TestCase):
 
     # Make base cases
     for j in range(0, 5):
-      self.TABLE[1][1][j] = 1
+      self.DP[1][1][j] = 1
     for i in range(2, 14):
       for j in range(10):
         for q in range(5):
           if j - q >= 0:
-            self.TABLE[1][i][j] += self.TABLE[1][i - 1][j - q]
+            self.DP[1][i][j] += self.DP[1][i - 1][j - q]
 
     # Make recursion
     for l in range(2, 5):
       for i in range(14):
         for j in range(10):
-          self.TABLE[l][i][j] = self.TABLE[l - 1][i][j]
+          self.DP[l][i][j] = self.DP[l - 1][i][j]
           if j - l + 1 >= 0:
-            self.TABLE[l][i][j] += self.TABLE[1][i][j - l + 1]
+            self.DP[l][i][j] += self.DP[1][i][j - l + 1]
 
   def setUp(self):
     if not self.UPDATED:
@@ -111,7 +111,7 @@ class TestDpTable(unittest.TestCase):
       self.UPDATED = True
 
   def test_dp_table(self):
-    self.assertListEqual(self.TABLE, DP)
+    self.assertListEqual(self.DP, DP)
 
 
 if __name__ == "__main__":
