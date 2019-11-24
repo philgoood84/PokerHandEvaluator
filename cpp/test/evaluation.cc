@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cassert>
 #include <algorithm>
-#include "phevaluator/phevaluator.h"
+#include <phevaluator/phevaluator.h>
 #include "gtest/gtest.h"
 #include "kev/kev_eval.h"
 
@@ -11,7 +11,7 @@ int percentage(long long numerator, long long denominator) {
   return numerator * 100 / denominator;
 }
 
-TEST(CorrectnessTest, TestFiveCards) {
+TEST(EvaluationTest, TestFiveCards) {
   int count = 0;
   int progress = 0;
   const int total = 2598960;
@@ -28,13 +28,13 @@ TEST(CorrectnessTest, TestFiveCards) {
         {
           for(int e = d + 1; e < 52; e++)
           {
-            int ph_eval = EvaluateCards(a, b, c, d, e); // C++ method
+            int ph_eval = EvaluateCards(a, b, c, d, e).value(); // C++ method
             int kev_eval = kev_eval_5cards(a, b, c, d, e); // Kev's method
 
             assert(ph_eval == kev_eval);
 
             Hand hand({a, b, c, d, e});
-            int ph_hand_eval = EvaluateHand(hand);
+            int ph_hand_eval = EvaluateHand(hand).value();
             assert(ph_hand_eval == kev_eval);
 
             count++;
@@ -55,7 +55,7 @@ TEST(CorrectnessTest, TestFiveCards) {
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestSixCards) {
+TEST(EvaluationTest, TestSixCards) {
   int count = 0;
   int progress = 0;
   const int total = 20358520;
@@ -74,13 +74,13 @@ TEST(CorrectnessTest, TestSixCards) {
           {
             for(int f = e + 1; f < 52; f++)
             {
-              int ph_eval = EvaluateCards(a, b, c, d, e, f); // C++ method
+              int ph_eval = EvaluateCards(a, b, c, d, e, f).value(); // C++ method
               int kev_eval = kev_eval_6cards(a, b, c, d, e, f); // Kev's method
 
               assert(ph_eval == kev_eval);
 
               Hand hand({a, b, c, d, e, f});
-              int ph_hand_eval = EvaluateHand(hand);
+              int ph_hand_eval = EvaluateHand(hand).value();
               assert(ph_hand_eval == kev_eval);
 
               count++;
@@ -102,7 +102,7 @@ TEST(CorrectnessTest, TestSixCards) {
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestSevenCards) {
+TEST(EvaluationTest, TestSevenCards) {
   int count = 0;
   int progress = 0;
   const int total = 133784560;
@@ -123,13 +123,13 @@ TEST(CorrectnessTest, TestSevenCards) {
             {
               for(int g = f + 1; g < 52; g++)
               {
-                int ph_eval = EvaluateCards(a, b, c, d, e, f, g);
+                int ph_eval = EvaluateCards(a, b, c, d, e, f, g).value();
                 int kev_eval = kev_eval_7cards(a, b, c, d, e, f, g);
 
                 assert(ph_eval == kev_eval);
 
                 Hand hand({a, b, c, d, e, f, g});
-                int ph_hand_eval = EvaluateHand(hand);
+                int ph_hand_eval = EvaluateHand(hand).value();
                 assert(ph_hand_eval == kev_eval);
 
                 count++;
@@ -152,7 +152,7 @@ TEST(CorrectnessTest, TestSevenCards) {
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestEightCards) {
+TEST(EvaluationTest, TestEightCards) {
   int count = 0;
   int progress = 0;
   const int total = 752538150;
@@ -175,24 +175,24 @@ TEST(CorrectnessTest, TestEightCards) {
               {
                 for(int h = g + 1; h < 52; h++)
                 {
-                  int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h);
+                  int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h).value();
 
                   // Compared with the best hand from 7-card evaluator
                   int best_seven = 10000;
 
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, g));
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, h));
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, h, g));
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, h, f, g));
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, h, e, f, g));
-                  best_seven = std::min(best_seven, EvaluateCards(a, b, h, d, e, f, g));
-                  best_seven = std::min(best_seven, EvaluateCards(a, h, c, d, e, f, g));
-                  best_seven = std::min(best_seven, EvaluateCards(h, b, c, d, e, f, g));
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, f, h).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, e, h, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, d, h, f, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, c, h, e, f, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, b, h, d, e, f, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(a, h, c, d, e, f, g).value());
+                  best_seven = std::min(best_seven, EvaluateCards(h, b, c, d, e, f, g).value());
 
                   assert(ph_eval == best_seven);
 
                   Hand hand({a, b, c, d, e, f, g, h});
-                  int ph_hand_eval = EvaluateHand(hand);
+                  int ph_hand_eval = EvaluateHand(hand).value();
                   assert(ph_hand_eval == kev_eval);
 
                   count++;
@@ -216,7 +216,7 @@ TEST(CorrectnessTest, TestEightCards) {
   std::printf("Tested %d hands in total\n", count);
 }
 
-TEST(CorrectnessTest, TestNineCards) {
+TEST(EvaluationTest, TestNineCards) {
   long long count = 0;
   int progress = 0;
   const long long total = 3679075400;
@@ -241,25 +241,34 @@ TEST(CorrectnessTest, TestNineCards) {
                 {
                   for(int i = h + 1; i < 52; i++)
                   {
-                    int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h, i);
+                    int ph_eval = EvaluateCards(a, b, c, d, e, f, g, h, i).value();
 
                     // Compared with the best hand from the 8-card evaluator
                     int best_eight = 10000;
 
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, i));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, f, i, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, e, i, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, d, i, f, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, c, i, e, f, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, b, i, d, e, f, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(a, i, c, d, e, f, g, h));
-                    best_eight = std::min(best_eight, EvaluateCards(i, b, c, d, e, f, g, h));
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, d, e, f, g, i).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, d, e, f, i, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, d, e, i, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, d, i, f, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, c, i, e, f, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, b, i, d, e, f, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(a, i, c, d, e, f, g, h).value());
+                    best_eight =
+                      std::min(best_eight, EvaluateCards(i, b, c, d, e, f, g, h).value());
 
                     assert(ph_eval == best_eight);
 
                     Hand hand({a, b, c, d, e, f, g, h, i});
-                    int ph_hand_eval = EvaluateHand(hand);
+                    int ph_hand_eval = EvaluateHand(hand).value();
                     assert(ph_hand_eval == kev_eval);
 
                     count++;

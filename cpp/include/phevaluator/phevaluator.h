@@ -71,28 +71,29 @@ int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int 
 
 #ifdef __cplusplus
 
-#include "phevaluator/card.h"
-#include "phevaluator/hand.h"
+#include <phevaluator/card.h>
+#include <phevaluator/hand.h>
+#include <phevaluator/rank.h>
 
 namespace phevaluator {
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e);
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e);
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f);
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f);
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g);
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g);
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g, const Card& h);
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h);
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g, const Card& h,
-                  const Card& i);
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h,
+                   const Card& i);
 
-int EvaluateHand(const Hand& hand);
+Rank EvaluateHand(const Hand& hand);
 
 } // namespace phevaluator
 

@@ -80,7 +80,7 @@ add_library(pheval SHARED
 target_include_directories(pheval PUBLIC include)
 target_compile_options(pheval PUBLIC -Ofast)
 add_executable(unit_tests
-  test/unit_tests.cc
+  test/evaluation.cc
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )

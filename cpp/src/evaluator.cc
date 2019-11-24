@@ -20,33 +20,33 @@
 
 namespace phevaluator {
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e) {
   return evaluate_5cards(a, b, c, d, e);
 }
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f) {
   return evaluate_6cards(a, b, c, d, e, f);
 }
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g) {
   return evaluate_7cards(a, b, c, d, e, f, g);
 }
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g, const Card& h) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h) {
   return evaluate_8cards(a, b, c, d, e, f, g, h);
 }
 
-int EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                  const Card& e, const Card& f, const Card& g, const Card& h,
-                  const Card& i) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h,
+                   const Card& i) {
   return evaluate_9cards(a, b, c, d, e, f, g, h, i);
 }
 
-int EvaluateHand(const Hand& hand) {
+Rank EvaluateHand(const Hand& hand) {
   if (suits[hand.getSuitHash()])
     return flush[hand.getSuitBinary()[suits[hand.getSuitHash()]-1]];
 
