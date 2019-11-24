@@ -21,6 +21,8 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
+
 enum rank_category {
   // FIVE_OF_A_KIND = 0, // Reserved
   STRAIGHT_FLUSH = 1,
@@ -57,6 +59,12 @@ const char* describe_rank(int rank);
  * Returns a string description of a sample hand of the rank, e.g. "AKQJT"
  */
 const char* describe_sample_hand(int rank);
+
+/*
+ * Given a rank from 1 to 7462
+ * Returns whether the rank is a flush
+ */
+bool is_flush(int rank);
 
 #ifdef __cplusplus
 } // closing brace for extern "C"
@@ -116,13 +124,7 @@ class Rank {
   }
 
   bool isFlush() const {
-    switch(category()) {
-    case STRAIGHT_FLUSH:
-    case FLUSH:
-      return true;
-    default:
-      return false;
-    }
+    return is_flush(value_);
   }
 
   Rank(int value) : value_(value) {}

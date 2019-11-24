@@ -59,6 +59,9 @@ add_subdirectory(
 # Use C++ 11 Standard to compile
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_C_STANDARD 99)
+
+
 # Add the PokerHandEvaluator library
 add_library(pheval STATIC
   src/dptables.c

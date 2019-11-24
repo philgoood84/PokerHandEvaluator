@@ -1,7 +1,7 @@
 CC=gcc
 CXX=g++
 INCLUDE=./include
-CFLAGS+=-O2
+CFLAGS+=-O2 -std=c99
 CXXFLAGS+=-O2 -std=c++14
 
 all: libpheval.a

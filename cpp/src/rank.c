@@ -53,3 +53,13 @@ const char* describe_rank(int rank) {
 const char* describe_sample_hand(int rank) {
   return rank_description[rank][0];
 }
+
+bool is_flush(int rank) {
+  switch(get_rank_category(rank)) {
+  case STRAIGHT_FLUSH:
+  case FLUSH:
+    return true;
+  default:
+    return false;
+  }
+}

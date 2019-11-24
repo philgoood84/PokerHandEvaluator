@@ -3,6 +3,7 @@ CXX=g++
 TOPDIR=..
 INCLUDE=${TOPDIR}/include
 SRC=${TOPDIR}/src
+CFLAGS+=-std=c99
 CXXFLAG+=-std=c++11
 
 all: c_example cpp_example
