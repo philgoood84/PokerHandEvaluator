@@ -59,8 +59,11 @@ add_subdirectory(
 # Use C++ 11 Standard to compile
 set(CMAKE_CXX_STANDARD 11)
 
-# Now simply link against gtest or gtest_main as needed. Eg
-add_library(pheval SHARED
+set(CMAKE_C_STANDARD 99)
+
+
+# Add the PokerHandEvaluator library
+add_library(pheval STATIC
   src/dptables.c
   src/evaluator.cc
   src/evaluator5.c
@@ -69,24 +72,41 @@ add_library(pheval SHARED
   src/evaluator8.c
   src/evaluator9.c
   src/hash.c
+  src/hand.cc
   src/hashtable.c
   src/hashtable5.c
   src/hashtable6.c
   src/hashtable7.c
   src/hashtable8.c
   src/hashtable9.c
+  src/rank.c
+  src/7462.c
 )
 target_include_directories(pheval PUBLIC include)
-target_compile_options(pheval PUBLIC -Ofast)
+target_compile_options(pheval PUBLIC -O2)
+
 add_executable(unit_tests
-  test/unit_tests.cc
+  test/evaluation.cc
+  test/rank.cc
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )
+target_compile_options(unit_tests PUBLIC -O2)
+target_link_libraries(unit_tests gtest_main pheval)
+
+add_test(NAME unit_tests COMMAND unit_tests)
+
 add_executable(benchmark_phevaluator
   benchmark/benchmark.cc
 )
-target_compile_options(unit_tests PUBLIC -Ofast)
-target_link_libraries(unit_tests gtest_main pheval)
 target_link_libraries(benchmark_phevaluator benchmark pheval)
-add_test(NAME unit_tests COMMAND unit_tests)
+
+add_executable(c_example
+  examples/c_example.c
+)
+target_link_libraries(c_example pheval)
+
+add_executable(cpp_example
+  examples/cpp_example.cc
+)
+target_link_libraries(cpp_example pheval)

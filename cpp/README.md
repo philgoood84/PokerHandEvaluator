@@ -11,7 +11,7 @@ cmake ..
 make
 ```
 
-This will generate a dynamic linked library `libpheval.dylib`, as well as
+This will generate a static-linked library `libpheval.a`, as well as
 a unit test binary `unit_tests`.
 
 Run the `unit_tests` to perform the unit tests:
@@ -29,92 +29,106 @@ code. In addition, at least C++11 standard is required.
 For example:
 
 ```bash
-g++ -I include/ -std=c++11 libpheval.dylib your_source_code.cc -o your_binary
+g++ -I include/ -std=c++11 libpheval.a your_source_code.cc -o your_binary
 ```
-
-In the [examples](examples) directory, there is a small example on how to
-use the library in both C and C++ languages. Run `make` can build the library
-and link the library with the example source files.
-
-### C methods
-
-PH Evaluator was originally coded in C, so it still preserves the C functions.
-
-```cpp
-int evaluate_5cards(int a, int b, int c, int d, int e);
-int evaluate_6cards(int a, int b, int c, int d, int e, int f);
-int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
-```
-
-However using these functions, user needs to convert his card into an integer
-ranged `[0, 52)`. You can find the mapping in the section [Card Id](#cardid).
-
-The return value is an integer indicating the rank of the hand, in the range
-`[1, 7452]` with the strongest hands (Royal straight flush) returning 1, the
-second strongest hands (King high straight flush) returning 2, and the weakest
-hands returning 7462.
-
-As a result, a lower return value indicates a stronger hand.
-
-Both the input and output is identical to the Cactus Kev's evaluator.
-
-### C++ methods
-
-In addition to the C methods, more handy C++ methods can be used to get the
-same result.
-
-```cpp
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e);
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f);
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g);
-```
-
-The Card can be constructed with either a [card id](#cardid), or a string
-representation. For example:
-
-```cpp
-Card a(3); // 2 in Spades
-Card b("AH"); // Ace in Hearts
-```
-
-The return value is the same to the C version, which is an integer in the
-range `[1, 7452]` indicating the rank of the hand, where a smaller number
-is stronger.
 
 ## Examples
 
 In this example we use a scenario in the game Texas Holdem:
 
-Community cards: 9c 4c 4s 9d 4h (both players share this cards)
+Community cards: 9c 4c 4s 9d 4h (both players share these cards)
 
 Player 1: Qc 6c
 
 Player 2: 2c 9h
 
-Both players have full houses. But player 1 only has a full house with 4,
-while player 2 has a full house with 9, which is stronger.
+Both players have full houses. But player 1 only has a four full house over
+nine, while player 2 has nine full house over four, which is stronger than
+player 1.
 
-The expected result is player 2 has a stronger hand than player 1, hence
-the return value of the evaluation of player 2 is lower than player 1.
+The following two sections will show us how this example hands are evaluated
+using PHEvaluator. All the code and compiling can be found in the
+[examples](examples) directory.
 
-### C++ methods
+### Example Code in C++
 
-To evaluate the hands in the above example, we can use the C++ method
-`phevaluator::EvaluateCards` and pass the 7 cards as arguments.
+We can construct a Card by providing a two character string, like this:
 
-```c++
-#include "phevaluator/phevaluator.h"
-#include <cassert>
-
-int main() {
-  int x = phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-  int y = phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9h");
-
-  assert(x > y);
-}
+```C++
+phevaluator::Card a = phevaluator::Card("Qc");
 ```
 
-### C methods
+Then the method `EvaluateCards` will take parameters from 5 to 9 Cards and
+return a Rank type. Sometimes, you can provide the strings directly to the
+method and let the Cards be constructed implicitly, to make your code
+cleaner.
+
+```C++
+phevaluator::Rank rank1 =
+  phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
+
+phevaluator::Rank rank2 =
+  phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9c");
+```
+
+Now that we have the Ranks from both players' hands. What information can
+we get from them?
+
+First, we can do comparison on these Ranks. A stronger hand is greater than
+a weaker hand.
+
+```C++
+assert(rank1 < rank2); // rank2 is stronger
+```
+
+We can also get its rank in all 7562 possible hands. This ranking is
+identical to the return value of the Cactus Kev's evaluator:
+the best rank has value 1, which is a Royal Straight Flush, while the
+worst rank is 7462.
+
+```C++
+int value1 = rank1.value(); // 292
+int value2 = rank2.value(); // 236
+```
+
+We can also tell the ranking category of the rank: either using the method
+`category` which returns an enumerator, or the method `describeCategory`
+which returns a string. In this example, both players are holding full houses.
+
+```C++
+assert(rank1.category() == FULL_HOUSE);
+assert(rank1.describeCategory() == "Full House");
+
+assert(rank2.category() == FULL_HOUSE);
+assert(rank2.describeCategory() == "Full House");
+```
+
+Apart from the ranking category, we can get more detail from the rank, using
+the `describeRank` or the `describeSampleHand` method.
+
+Let's see a sample hand from the `rank2`:
+
+```C++
+assert(rank2.describeSampleHand() == "9 9 9 4 4");
+```
+
+As we can see, the best 5-card hand from player 2 is 9-9-9-4-4. Suit
+information is missing from this method, because usually they don't matter,
+unless all the five cards have the same suit. So we have another method that
+tells us whether the sample hand is a flush. In this example, it is not.
+
+```C++
+assert(!rank2.isFlush());
+```
+
+Finally, we have another method to give us a short description of the sample
+hand:
+
+```C++
+assert(rank2.describeRank() == "Nines Full over Fours");
+```
+
+### Example Code in C
 
 In the C version, the evaluation would be tricker, since we have to convert
 the card to an integer by ourselves.
@@ -129,31 +143,70 @@ And the rank values are:
 deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
 nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
 
-```c
-#include "phevaluator/phevaluator.h"
-#include <assert>
+The mapping of a Card and its integer value can be found in [Card Id](#cardid).
 
-int main() {
-  // Community cards
-  int a = 7 * 4 + 0; // 9c
-  int b = 2 * 4 + 0; // 4c
-  int c = 2 * 4 + 3; // 4s
-  int d = 7 * 4 + 1; // 9d
-  int e = 2 * 4 + 2; // 4h
+```C
+// Community cards
+int a = 7 * 4 + 0; // 9c
+int b = 2 * 4 + 0; // 4c
+int c = 2 * 4 + 3; // 4s
+int d = 7 * 4 + 1; // 9d
+int e = 2 * 4 + 2; // 4h
 
-  // Player 1
-  int f = 10 * 4 + 0; // Qc
-  int g = 4 * 4 + 0; // 6c
+// Player 1
+int f = 10 * 4 + 0; // Qc
+int g = 4 * 4 + 0; // 6c
 
-  // Player 2
-  int h = 0 * 4 + 0; // 2c
-  int i = 7 * 4 + 2; // 9h
+// Player 2
+int h = 0 * 4 + 0; // 2c
+int i = 7 * 4 + 2; // 9h
+```
 
-  int x = evaluate_7cards(a, b, c, d, e, f, g);
-  int y = evaluate_7cards(a, b, c, d, e, h, i);
+After constructing all the Cards, we will use `evaluate_7cards` to get a
+rank value. A rank value indicates its rank in the 7462 ranking table. The
+best rank is 1, which is a Royal Straight Flush, and the worst rank is 7462.
 
-  assert(x > y);
-}
+```C
+int rank1 = evaluate_7cards(a, b, c, d, e, f, g); // 292
+int rank2 = evaluate_7cards(a, b, c, d, e, h, i); // 236
+```
+
+If we compare these two rank value, the rank with a smaller value is
+stronger.
+
+```C
+assert(rank1 > rank2); // rank2 is stronger
+```
+
+Similar to the C++ interfaces, we can see the rank category:
+
+```C
+enum rank_category category = get_rank_category(rank1);
+assert(category == FULL_HOUSE);
+
+const char * categoryDesc = describe_rank_category(category); // "Full House"
+```
+
+Or get the sample hand from the rank:
+
+```C
+describe_sample_hand(rank2); // 9 9 9 4 4
+```
+
+We can see the 5 best cards from player 2 are 9 9 9 4 4.
+
+Although suit information is missing here, indeed we only care about whether
+all five cards are in the same suit or not. We can check it using the
+`is_flush` method:
+
+```C
+is_flush(rank2); // false
+```
+
+Finally, we can use `rank_description` to get a short description of the rank:
+
+```C
+describe_rank(rank2); // Nines Full over Fours
 ```
 
 <a name="cardid"></a>
@@ -163,9 +216,13 @@ We can use an integer to represent a card. The two least significant bits
 represent the 4 suits, ranged from 0-3. The rest of it represent the 13
 ranks, ranged from 0-12.
 
-More specifically:
+More specifically, the ranks are:
+
 deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
 nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
+
+And the suits are:
+club = 0, diamond = 1, heart = 2, spade = 3
 
 So that you can use `rank * 4 + suit` to get the card ID.
  

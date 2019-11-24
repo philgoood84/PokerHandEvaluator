@@ -5,7 +5,7 @@
 
 using namespace phevaluator;
 
-static void EvaluateAllFiveCardHands(benchmark::State& state) {
+static void EvaluateAllFiveCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 48; a++) {
       for(int b = a + 1; b < 49; b++) {
@@ -20,9 +20,9 @@ static void EvaluateAllFiveCardHands(benchmark::State& state) {
     }
   }
 }
-BENCHMARK(EvaluateAllFiveCardHands);
+BENCHMARK(EvaluateAllFiveCards);
 
-static void EvaluateAllSixCardHands(benchmark::State& state) {
+static void EvaluateAllSixCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 47; a++) {
       for(int b = a + 1; b < 48; b++) {
@@ -39,9 +39,9 @@ static void EvaluateAllSixCardHands(benchmark::State& state) {
     }
   }
 }
-BENCHMARK(EvaluateAllSixCardHands);
+BENCHMARK(EvaluateAllSixCards);
 
-static void EvaluateAllSevenCardHands(benchmark::State& state) {
+static void EvaluateAllSevenCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 46; a++) {
       for(int b = a + 1; b < 47; b++) {
@@ -60,9 +60,9 @@ static void EvaluateAllSevenCardHands(benchmark::State& state) {
     }
   }
 }
-BENCHMARK(EvaluateAllSevenCardHands);
+BENCHMARK(EvaluateAllSevenCards);
 
-static void EvaluateAllEightCardHands(benchmark::State& state) {
+static void EvaluateAllEightCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 45; a++) {
       for(int b = a + 1; b < 46; b++) {
@@ -83,9 +83,9 @@ static void EvaluateAllEightCardHands(benchmark::State& state) {
     }
   }
 }
-BENCHMARK(EvaluateAllEightCardHands);
+BENCHMARK(EvaluateAllEightCards);
 
-static void EvaluateAllNineCardHands(benchmark::State& state) {
+static void EvaluateAllNineCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 44; a++) {
       for(int b = a + 1; b < 45; b++) {
@@ -108,7 +108,24 @@ static void EvaluateAllNineCardHands(benchmark::State& state) {
     }
   }
 }
-BENCHMARK(EvaluateAllNineCardHands);
+BENCHMARK(EvaluateAllNineCards);
+
+static void EvaluateAllFiveCardHands(benchmark::State& state) {
+  for (auto _ : state) {
+    for(int a = 0; a < 48; a++) {
+      for(int b = a + 1; b < 49; b++) {
+        for(int c = b + 1; c < 50; c++) {
+          for(int d = c + 1; d < 51; d++) {
+            for(int e = d + 1; e < 52; e++) {
+              EvaluateHand(Hand({a, b, c, d, e}));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//BENCHMARK(EvaluateAllFiveCardHands);
 
 BENCHMARK_MAIN();
 

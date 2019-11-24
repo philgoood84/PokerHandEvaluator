@@ -17,6 +17,14 @@
 #ifndef HASH_H
 #define HASH_H
 
-int hash_quinary(unsigned char q[], int len, int k);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int hash_quinary(const unsigned char q[], int len, int k);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif // HASH_H

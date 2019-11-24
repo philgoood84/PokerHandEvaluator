@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "tables.h"
 
-int hash_quinary(unsigned char q[], int len, int k)
+int hash_quinary(const unsigned char q[], int len, int k)
 {
   int sum = 0;
   int i;
@@ -37,7 +37,7 @@ int hash_quinary(unsigned char q[], int len, int k)
   return sum;
 }
 
-int hash_binary(unsigned char q[], int len, int k)
+int hash_binary(const unsigned char q[], int len, int k)
 {
   int sum = 0;
   int i;

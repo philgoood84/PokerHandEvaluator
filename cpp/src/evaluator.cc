@@ -14,28 +14,53 @@
  *  limitations under the License.
  */
 
-#include "phevaluator/phevaluator.h"
+#include <phevaluator/phevaluator.h>
+#include "hash.h"
+#include "tables.h"
 
 namespace phevaluator {
 
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e) {
   return evaluate_5cards(a, b, c, d, e);
 }
 
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f) {
   return evaluate_6cards(a, b, c, d, e, f);
 }
 
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g) {
   return evaluate_7cards(a, b, c, d, e, f, g);
 }
 
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g, Card h) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h) {
   return evaluate_8cards(a, b, c, d, e, f, g, h);
 }
 
-int EvaluateCards(Card a, Card b, Card c, Card d, Card e, Card f, Card g, Card h, Card i) {
+Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
+                   const Card& e, const Card& f, const Card& g, const Card& h,
+                   const Card& i) {
   return evaluate_9cards(a, b, c, d, e, f, g, h, i);
+}
+
+Rank EvaluateHand(const Hand& hand) {
+  if (suits[hand.getSuitHash()])
+    return flush[hand.getSuitBinary()[suits[hand.getSuitHash()]-1]];
+
+  const int hash = hash_quinary(hand.getQuinary().data(), 13, hand.size());
+
+  switch (hand.size()) {
+    case 5: return noflush5[hash];
+    case 6: return noflush6[hash];
+    case 7: return noflush7[hash];
+    case 8: return noflush8[hash];
+    case 9: return noflush9[hash];
+  }
+
+  return noflush5[hash];
 }
 
 } // namespace phevaluator

@@ -7,6 +7,8 @@ matrix:
         - cd build
         - cmake ..
         - make
+        - ./c_example
+        - ./cpp_example
         - ./unit_tests
         - ./benchmark_phevaluator
     - language: python
