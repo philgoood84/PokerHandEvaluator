@@ -115,7 +115,7 @@ class Rank {
     return describe_sample_hand(value_);
   }
 
-  bool suited() const {
+  bool isFlush() const {
     switch(category()) {
     case STRAIGHT_FLUSH:
     case FLUSH:

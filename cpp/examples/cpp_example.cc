@@ -32,5 +32,5 @@ int main()
 
   assert(rank2.describeSampleHand() == "9 9 9 4 4");
   std::cout << "The best hand from player 2 is " << rank2.describeSampleHand() <<
-    (rank2.suited() ? " suited" : " unsuited") << std::endl;
+    (rank2.isFlush() ? " in flush" : "") << std::endl;
 }

@@ -48,6 +48,6 @@ TEST(RankTest, TestRankDescription) {
   ASSERT_EQ(a.describeSampleHand(), "4 4 4 9 9");
   ASSERT_EQ(b.describeSampleHand(), "A K Q J T");
 
-  ASSERT_FALSE(a.suited());
-  ASSERT_TRUE(b.suited());
+  ASSERT_FALSE(a.isFlush());
+  ASSERT_TRUE(b.isFlush());
 }
