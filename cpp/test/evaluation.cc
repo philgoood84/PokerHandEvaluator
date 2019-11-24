@@ -292,4 +292,3 @@ TEST(EvaluationTest, TestNineCards) {
   std::printf("Complete testing nine cards\n");
   std::printf("Tested %lld hands in total\n", count);
 }
-

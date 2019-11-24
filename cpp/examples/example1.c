@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include "phevaluator/phevaluator.h"
+#include <assert.h>
+#include <phevaluator/phevaluator.h>
 
 /*
  * This C code is a demonstration of how to calculate the card id, which will
@@ -10,7 +10,7 @@
  */
 int main()
 {
-    int a, b, c, d, e, f, g, h, i;
+  int a, b, c, d, e, f, g, h, i;
 	int x, y;
 
 	/*
@@ -30,7 +30,7 @@ int main()
 	 * Player 1: Qc 6c
 	 * Player 2: 2c 9h
 	 *
-	 * Both player have a full house, but player 1 only has a four full house
+	 * Both players have a full house, but player 1 only has a four full house
 	 * while player 2 has a nine full house.
 	 * The result should be player 2 has a stronger hand than player 1.
 	 */
@@ -55,6 +55,8 @@ int main()
 	// Evaluating the hand of player 2
 	y = evaluate_7cards(a, b, c, d, e, h, i);
 
+  assert(x == 292);
+  assert(y == 236);
 	printf("The rank of the hand in player 1 is %d\n", x); // expected 292
 	printf("The rank of the hand in player 2 is %d\n", y); // expected 236
 	printf("Player 2 has a stronger hand\n");

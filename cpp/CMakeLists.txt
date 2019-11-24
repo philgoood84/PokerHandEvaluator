@@ -81,6 +81,7 @@ target_include_directories(pheval PUBLIC include)
 target_compile_options(pheval PUBLIC -Ofast)
 add_executable(unit_tests
   test/evaluation.cc
+  test/rank.cc
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )

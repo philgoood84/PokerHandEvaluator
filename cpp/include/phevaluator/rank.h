@@ -30,27 +30,27 @@ class Rank {
  public:
   int value() const { return value_; }
 
-  bool operator<(const Rank& other) {
+  bool operator<(const Rank& other) const {
     return value_ >= other.value_;
   }
 
-  bool operator<=(const Rank& other) {
+  bool operator<=(const Rank& other) const {
     return value_ > other.value_;
   }
 
-  bool operator>(const Rank& other) {
+  bool operator>(const Rank& other) const {
     return value_ <= other.value_;
   }
 
-  bool operator>=(const Rank& other) {
+  bool operator>=(const Rank& other) const {
     return value_ < other.value_;
   }
 
-  bool operator==(const Rank& other) {
+  bool operator==(const Rank& other) const {
     return value_ == other.value_;
   }
 
-  bool operator!=(const Rank& other) {
+  bool operator!=(const Rank& other) const {
     return value_ != other.value_;
   }
 
