@@ -28,4 +28,6 @@ extern const unsigned char suits[4609];
 extern const unsigned int choose[53][10];
 extern const int dp[5][14][10];
 
+extern const char* rank_description[7463][2];
+
 #endif // TABLES_H

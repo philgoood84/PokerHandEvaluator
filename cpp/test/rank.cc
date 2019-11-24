@@ -29,11 +29,25 @@ TEST(RankTest, TestComparison) {
 
 TEST(RankTest, TestRankCategory) {
   Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-	Rank b = EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9h");
+	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts", "2c", "9h");
 
   ASSERT_EQ(a.category(), FULL_HOUSE);
-  ASSERT_EQ(b.category(), FULL_HOUSE);
+  ASSERT_EQ(b.category(), STRAIGHT_FLUSH);
 
   ASSERT_EQ(a.describeCategory(), "Full House");
-  ASSERT_EQ(b.describeCategory(), "Full House");
+  ASSERT_EQ(b.describeCategory(), "Straight Flush");
+}
+
+TEST(RankTest, TestRankDescription) {
+  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
+	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts", "2c", "9h");
+
+  ASSERT_EQ(a.describeRank(), "Fours Full over Nines");
+  ASSERT_EQ(b.describeRank(), "Royal Flush");
+
+  ASSERT_EQ(a.describeSampleHand(), "4 4 4 9 9");
+  ASSERT_EQ(b.describeSampleHand(), "A K Q J T");
+
+  ASSERT_FALSE(a.suited());
+  ASSERT_TRUE(b.suited());
 }

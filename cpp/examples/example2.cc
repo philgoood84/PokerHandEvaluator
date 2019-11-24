@@ -23,9 +23,14 @@ int main()
   assert(a < b);
   std::cout << "Player b has a stronger hand" << std::endl;
 
-  assert(a.category() == FULL_HOUSE);
-  assert(a.describeCategory() == "Full House");
-
   assert(b.category() == FULL_HOUSE);
   assert(b.describeCategory() == "Full House");
+  std::cout << "Player b has a " << b.describeCategory() << std::endl;
+
+  assert(b.describeRank() == "Nines Full over Fours");
+  std::cout << "More specifically, player b has a " << b.describeCategory() << std::endl;
+
+  assert(b.describeSampleHand() == "9 9 9 4 4");
+  std::cout << "The best hand from player 2 is " << b.describeSampleHand() <<
+    (b.suited() ? " suited" : " unsuited") << std::endl;
 }

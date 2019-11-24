@@ -65,10 +65,19 @@ int main()
 	// it's considered to be a higher rank and stronger hand.
 	// So player 2 beats player 1.
 
-  int rank_category = get_rank_category(x);
-  assert(rank_category == FULL_HOUSE);
-  const char* rank_category_description = describe_rank_category(rank_category);
+  enum rank_category category = get_rank_category(y);
+  assert(category == FULL_HOUSE);
+  const char* rank_category_description = describe_rank_category(category);
   assert(strcmp(rank_category_description, "Full House") == 0);
+  printf("Player 2 has a %s\n", rank_category_description);
+
+  const char* rank_description = describe_rank(y);
+  printf("More specifically, player 2 has a %s\n", rank_description);
+  assert(strcmp(rank_description, "Nines Full over Fours") == 0);
+
+  const char* rank_sample_hand = describe_sample_hand(y);
+  printf("The best hand from player 2 is %s\n", rank_sample_hand);
+  assert(strcmp(rank_sample_hand, "9 9 9 4 4") == 0);
 
 	return 0;
 }

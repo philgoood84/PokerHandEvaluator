@@ -34,8 +34,29 @@ enum rank_category {
   HIGH_CARD,
 };
 
-int get_rank_category(int rank);
-const char* describe_rank_category(int rank_category);
+/*
+ * Given a rank from 1 to 7462
+ * Returns an integer from the enum rank_category
+ */
+enum rank_category get_rank_category(int rank);
+
+/*
+ * Given an enum rank_category
+ * Returns a string description of the rank category, e.g. "Flush", "Full House"
+ */
+const char* describe_rank_category(enum rank_category category);
+
+/*
+ * Given a rank from 1 to 7462
+ * Returns a string description of the rank, e.g. "King-High Straight Flush"
+ */
+const char* describe_rank(int rank);
+
+/*
+ * Given a rank from 1 to 7462
+ * Returns a string description of a sample hand of the rank, e.g. "AKQJT"
+ */
+const char* describe_sample_hand(int rank);
 
 #ifdef __cplusplus
 } // closing brace for extern "C"
@@ -78,12 +99,30 @@ class Rank {
     return value_ != other.value_;
   }
 
-  int category() const {
+  enum rank_category category() const {
     return get_rank_category(value_);
   }
 
   std::string describeCategory() const {
     return describe_rank_category(category());
+  }
+
+  std::string describeRank() const {
+    return describe_rank(value_);
+  }
+
+  std::string describeSampleHand() const {
+    return describe_sample_hand(value_);
+  }
+
+  bool suited() const {
+    switch(category()) {
+    case STRAIGHT_FLUSH:
+    case FLUSH:
+      return true;
+    default:
+      return false;
+    }
   }
 
   Rank(int value) : value_(value) {}

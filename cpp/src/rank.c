@@ -15,6 +15,7 @@
  */
 
 #include <phevaluator/rank.h>
+#include "tables.h"
 
 const char* rank_category_description[] = {
   "",
@@ -29,7 +30,7 @@ const char* rank_category_description[] = {
   "High Card",
 };
 
-int get_rank_category(int rank) {
+enum rank_category get_rank_category(int rank) {
   if (rank > 6185) return HIGH_CARD;        // 1277 high card
   if (rank > 3325) return ONE_PAIR;         // 2860 one pair
   if (rank > 2467) return TWO_PAIR;         //  858 two pair
@@ -41,6 +42,14 @@ int get_rank_category(int rank) {
   return STRAIGHT_FLUSH;                    //   10 straight-flushes
 }
 
-const char* describe_rank_category(int rank_category) {
-  return rank_category_description[rank_category];
+const char* describe_rank_category(enum rank_category category) {
+  return rank_category_description[category];
+}
+
+const char* describe_rank(int rank) {
+  return rank_description[rank][1];
+}
+
+const char* describe_sample_hand(int rank) {
+  return rank_description[rank][0];
 }
