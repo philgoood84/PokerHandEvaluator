@@ -50,9 +50,9 @@ int EvaluateHand(const Hand& hand) {
   if (suits[hand.getSuitHash()])
     return flush[hand.getSuitBinary()[suits[hand.getSuitHash()]-1]];
 
-  const int hash = hash_quinary(hand.getQuinary().data(), 13, hand.getSize());
+  const int hash = hash_quinary(hand.getQuinary().data(), 13, hand.size());
 
-  switch (hand.getSize()) {
+  switch (hand.size()) {
     case 5: return noflush5[hash];
     case 6: return noflush6[hash];
     case 7: return noflush7[hash];

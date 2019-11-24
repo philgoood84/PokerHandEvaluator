@@ -36,7 +36,7 @@ class Hand {
   Hand& operator+=(const Card& card);
   Hand operator+(const Card& card);
 
-  const unsigned char& getSize() const { return size_; }
+  const unsigned char& size() const { return size_; }
   const int& getSuitHash() const { return suitHash_; }
   const std::array<int, 4>& getSuitBinary() const { return suitBinary_; }
   const std::array<unsigned char, 13> getQuinary() const { return quinary_; }
