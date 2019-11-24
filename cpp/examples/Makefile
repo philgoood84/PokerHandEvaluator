@@ -18,7 +18,8 @@ libpheval.a: ${SRC}/evaluator5.o ${SRC}/hashtable5.o \
              ${SRC}/evaluator7.o ${SRC}/hashtable7.o \
              ${SRC}/evaluator8.o ${SRC}/hashtable8.o \
              ${SRC}/evaluator9.o ${SRC}/hashtable9.o \
-             ${SRC}/hash.o ${SRC}/hashtable.o ${SRC}/dptables.o ${SRC}/evaluator.o
+             ${SRC}/hash.o ${SRC}/hashtable.o ${SRC}/dptables.o ${SRC}/evaluator.o \
+             ${SRC}/rank.o
 	ar rcs $@ $^
 
 %.o: %.cc

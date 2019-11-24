@@ -76,6 +76,7 @@ add_library(pheval SHARED
   src/hashtable7.c
   src/hashtable8.c
   src/hashtable9.c
+  src/rank.c
 )
 target_include_directories(pheval PUBLIC include)
 target_compile_options(pheval PUBLIC -Ofast)
