@@ -11,7 +11,7 @@ cmake ..
 make
 ```
 
-This will generate a dynamic linked library `libpheval.dylib`, as well as
+This will generate a static-linked library `libpheval.a`, as well as
 a unit test binary `unit_tests`.
 
 Run the `unit_tests` to perform the unit tests:
@@ -29,7 +29,7 @@ code. In addition, at least C++11 standard is required.
 For example:
 
 ```bash
-g++ -I include/ -std=c++11 libpheval.dylib your_source_code.cc -o your_binary
+g++ -I include/ -std=c++11 libpheval.a your_source_code.cc -o your_binary
 ```
 
 In the [examples](examples) directory, there is a small example on how to

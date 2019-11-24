@@ -5,12 +5,12 @@ INCLUDE=${TOPDIR}/include
 SRC=${TOPDIR}/src
 CXXFLAG+=-std=c++11
 
-all: example1 example2
+all: c_example cpp_example
 
-example1: example1.o libpheval.a
-	${CC} ${CFLAGS} $^ -o $@
+c_example: c_example.c libpheval.a
+	${CC} ${CFLAGS} -I${INCLUDE} $^ -o $@
 
-example2: example2.cc libpheval.a
+cpp_example: cpp_example.cc libpheval.a
 	${CXX} ${CFLAGS} ${CXXFLAG} -I${INCLUDE} $^ -o $@
 
 libpheval.a: ${SRC}/evaluator5.o ${SRC}/hashtable5.o \
@@ -29,4 +29,4 @@ libpheval.a: ${SRC}/evaluator5.o ${SRC}/hashtable5.o \
 	${CC} -c ${CFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm -rf *.o example1 example2
+	rm -rf *.o c_example cpp_example
