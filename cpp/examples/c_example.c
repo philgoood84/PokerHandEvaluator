@@ -13,27 +13,29 @@
 int main()
 {
 	/*
-	 * The least two significant bits represents the suit.
-	 * As long as they are distinct, it's OK.
-	 * Here we use 0 for club, 1 for diamond, 2 for heart, and 3 for spade.
-	 *
-	 * The rest of the bits represents the rank, the rank values are:
-	 * deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
-	 * nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
-	 *
-	 * We can use the formula `rank * 4 + suit` to get the card id.
-	 *
-	 *
 	 * In this example we use a scenario in the game Texas Holdem:
-	 * Community cards: 9c 4c 4s 9d 4h (both player share this cards)
+	 * Community cards: 9c 4c 4s 9d 4h (both players share these cards)
 	 * Player 1: Qc 6c
 	 * Player 2: 2c 9h
 	 *
-	 * Both players have a full house, but player 1 only has a four full house
+	 * Both players have full houses, but player 1 has only a four full house
 	 * while player 2 has a nine full house.
-	 * The result should be player 2 has a stronger hand than player 1.
+   *
+	 * The result is player 2 has a stronger hand than player 1.
 	 */
 
+  /*
+   * To calculate the value of each card, we can either use the Card Id
+   * mapping table, or use the formula rank * 4 + suit to get the value
+   *
+   * More specifically, the ranks are:
+   *
+   * deuce = 0, trey = 1, four = 2, five = 3, six = 4, seven = 5, eight = 6,
+   * nine = 7, ten = 8, jack = 9, queen = 10, king = 11, ace = 12.
+   *
+   * And the suits are:
+   * club = 0, diamond = 1, heart = 2, spade = 3
+   */
 	// Community cards
 	int a = 7 * 4 + 0; // 9c
 	int b = 2 * 4 + 0; // 4c
