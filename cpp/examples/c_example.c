@@ -52,32 +52,32 @@ int main()
 	int i = 7 * 4 + 2; // 9h
 
 	// Evaluating the hand of player 1
-	int x = evaluate_7cards(a, b, c, d, e, f, g);
+	int rank1 = evaluate_7cards(a, b, c, d, e, f, g);
 	// Evaluating the hand of player 2
-	int y = evaluate_7cards(a, b, c, d, e, h, i);
+	int rank2 = evaluate_7cards(a, b, c, d, e, h, i);
 
-  assert(x == 292);
-  assert(y == 236);
+  assert(rank1 == 292);
+  assert(rank2 == 236);
 
-	printf("The rank of the hand in player 1 is %d\n", x); // expected 292
-	printf("The rank of the hand in player 2 is %d\n", y); // expected 236
+	printf("The rank of the hand in player 1 is %d\n", rank1); // expected 292
+	printf("The rank of the hand in player 2 is %d\n", rank2); // expected 236
 	printf("Player 2 has a stronger hand\n");
 
 	// Since the return value of the hand in player 2 is less than player 1,
 	// it's considered to be a higher rank and stronger hand.
 	// So player 2 beats player 1.
 
-  enum rank_category category = get_rank_category(y);
+  enum rank_category category = get_rank_category(rank2);
   assert(category == FULL_HOUSE);
   const char* rank_category_description = describe_rank_category(category);
   assert(strcmp(rank_category_description, "Full House") == 0);
   printf("Player 2 has a %s\n", rank_category_description);
 
-  const char* rank_description = describe_rank(y);
+  const char* rank_description = describe_rank(rank2);
   printf("More specifically, player 2 has a %s\n", rank_description);
   assert(strcmp(rank_description, "Nines Full over Fours") == 0);
 
-  const char* rank_sample_hand = describe_sample_hand(y);
+  const char* rank_sample_hand = describe_sample_hand(rank2);
   printf("The best hand from player 2 is %s\n", rank_sample_hand);
   assert(strcmp(rank_sample_hand, "9 9 9 4 4") == 0);
 
