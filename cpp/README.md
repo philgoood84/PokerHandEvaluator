@@ -22,7 +22,7 @@ Run the `unit_tests` to perform the unit tests:
 
 ## Use the library
 
-After building the library `libpheval.dylib`, you can add the `./include`
+After building the library `libpheval.a`, you can add the `./include`
 directory to your includes path, and link the library to your source
 code. In addition, at least C++11 standard is required.
 
