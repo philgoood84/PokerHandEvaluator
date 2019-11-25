@@ -8,16 +8,16 @@
 using namespace phevaluator;
 
 TEST(RankTest, TestValue) {
-  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-	Rank b = EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9h");
+  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h");
+	Rank b = EvaluateCards("9c", "4c", "4s", "9d", "9h");
 
   ASSERT_EQ(a.value(), 292);
   ASSERT_EQ(b.value(), 236);
 }
 
 TEST(RankTest, TestComparison) {
-  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-	Rank b = EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9h");
+  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h");
+	Rank b = EvaluateCards("9c", "4c", "4s", "9d", "9h");
 
   ASSERT_GT(b, a);
   ASSERT_GE(b, a);
@@ -28,8 +28,8 @@ TEST(RankTest, TestComparison) {
 }
 
 TEST(RankTest, TestRankCategory) {
-  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts", "2c", "9h");
+  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h");
+	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts");
 
   ASSERT_EQ(a.category(), FULL_HOUSE);
   ASSERT_EQ(b.category(), STRAIGHT_FLUSH);
@@ -39,8 +39,8 @@ TEST(RankTest, TestRankCategory) {
 }
 
 TEST(RankTest, TestRankDescription) {
-  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h", "Qc", "6c");
-	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts", "2c", "9h");
+  Rank a = EvaluateCards("9c", "4c", "4s", "9d", "4h");
+	Rank b = EvaluateCards("As", "Ks", "Qs", "Js", "Ts");
 
   ASSERT_EQ(a.describeRank(), "Fours Full over Nines");
   ASSERT_EQ(b.describeRank(), "Royal Flush");
