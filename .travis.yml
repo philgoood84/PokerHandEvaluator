@@ -1,16 +1,29 @@
-matrix:
+jobs:
   include:
     - language: cpp
+      name: C++ Standard Test
+      before_script:
+        - mkdir -p cpp/build
+        - cd cpp/build
+        - cmake .. ; make
       script:
-        - cd cpp
-        - mkdir -p build
-        - cd build
-        - cmake ..
-        - make
         - ./c_example
         - ./cpp_example
-        - ./unit_tests
-        - ./benchmark_phevaluator
+        - ./unit_tests --gtest_filter="-EvaluationTest.TestOmahaCards" # Skip OmahaTests
+    - language: cpp
+      name: C++ Benchmark
+      before_script:
+        - mkdir -p cpp/build
+        - cd cpp/build
+        - cmake .. ; make
+      script: ./benchmark_phevaluator
+    - language: cpp
+      name: C++ Omaha Test
+      before_script:
+        - mkdir -p cpp/build
+        - cd cpp/build
+        - cmake .. ; make
+      script: ./unit_tests --gtest_filter="EvaluationTest.TestOmahaCards"
     - language: python
       python: 3.7
       before_install:

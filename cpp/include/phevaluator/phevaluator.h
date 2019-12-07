@@ -65,6 +65,13 @@ int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
 int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h);
 int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int i);
 
+/*
+ * The first five parameters are the community cards on the board
+ * The last four parameters are the hole cards of the player
+ */
+int evaluate_omaha_cards(int c1, int c2, int c3, int c4, int c5,
+                         int h1, int h2, int h3, int h4);
+
 #ifdef __cplusplus
 } // closing brace for extern "C"
 #endif
@@ -92,6 +99,15 @@ Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
 Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
                    const Card& e, const Card& f, const Card& g, const Card& h,
                    const Card& i);
+
+/*
+ * The first five parameters are the community cards on the board
+ * The last four parameters are the hole cards of the player
+ */
+Rank EvaluateOmahaCards(const Card& c1, const Card& c2, const Card& c3,
+                        const Card& c4, const Card& c5,
+                        const Card& h1, const Card& h2, const Card& h3, const Card& h4);
+
 
 Rank EvaluateHand(const Hand& hand);
 

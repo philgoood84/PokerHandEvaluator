@@ -110,6 +110,31 @@ static void EvaluateAllNineCards(benchmark::State& state) {
 }
 BENCHMARK(EvaluateAllNineCards);
 
+static void EvaluateAllOmahaCards(benchmark::State& state) {
+  for (auto _ : state) {
+    for(int a = 0; a < 44; a++) {
+      for(int b = a + 1; b < 45; b++) {
+        for(int c = b + 1; c < 46; c++) {
+          for(int d = c + 1; d < 47; d++) {
+            for(int e = d + 1; e < 48; e++) {
+              for(int f = e + 1; f < 49; f++) {
+                for(int g = f + 1; g < 50; g++) {
+                  for(int h = g + 1; h < 51; h++) {
+                    for(int i = h + 1; i < 52; i++) {
+                      evaluate_omaha_cards(a, b, c, d, e, f, g, h, i);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+BENCHMARK(EvaluateAllOmahaCards);
+
 static void EvaluateAllFiveCardHands(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 48; a++) {

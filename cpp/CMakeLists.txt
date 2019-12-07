@@ -85,21 +85,36 @@ add_library(pheval STATIC
 target_include_directories(pheval PUBLIC include)
 target_compile_options(pheval PUBLIC -O2)
 
+add_library(phevalomaha STATIC
+  src/dptables.c
+  src/tables_omaha.c
+  src/evaluator_omaha.c
+  src/evaluator_omaha.cc
+  src/hash.c
+  src/hand.cc
+  src/hashtable.c
+  src/rank.c
+  src/7462.c
+)
+target_include_directories(phevalomaha PUBLIC include)
+target_compile_options(phevalomaha PUBLIC -O2)
+
 add_executable(unit_tests
   test/evaluation.cc
+  test/evaluation_omaha.cc
   test/rank.cc
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )
 target_compile_options(unit_tests PUBLIC -O2)
-target_link_libraries(unit_tests gtest_main pheval)
+target_link_libraries(unit_tests gtest_main pheval phevalomaha)
 
 add_test(NAME unit_tests COMMAND unit_tests)
 
 add_executable(benchmark_phevaluator
   benchmark/benchmark.cc
 )
-target_link_libraries(benchmark_phevaluator benchmark pheval)
+target_link_libraries(benchmark_phevaluator benchmark pheval phevalomaha)
 
 add_executable(c_example
   examples/c_example.c
