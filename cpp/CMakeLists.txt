@@ -69,16 +69,12 @@ add_library(pheval STATIC
   src/evaluator5.c
   src/evaluator6.c
   src/evaluator7.c
-  src/evaluator8.c
-  src/evaluator9.c
   src/hash.c
   src/hand.cc
   src/hashtable.c
   src/hashtable5.c
   src/hashtable6.c
   src/hashtable7.c
-  src/hashtable8.c
-  src/hashtable9.c
   src/rank.c
   src/7462.c
 )

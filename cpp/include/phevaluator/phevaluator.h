@@ -62,8 +62,6 @@ extern "C" {
 int evaluate_5cards(int a, int b, int c, int d, int e);
 int evaluate_6cards(int a, int b, int c, int d, int e, int f);
 int evaluate_7cards(int a, int b, int c, int d, int e, int f, int g);
-int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h);
-int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int i);
 
 /*
  * The first five parameters are the community cards on the board
@@ -92,13 +90,6 @@ Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
 
 Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
                    const Card& e, const Card& f, const Card& g);
-
-Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                   const Card& e, const Card& f, const Card& g, const Card& h);
-
-Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                   const Card& e, const Card& f, const Card& g, const Card& h,
-                   const Card& i);
 
 /*
  * The first five parameters are the community cards on the board

@@ -62,54 +62,6 @@ static void EvaluateAllSevenCards(benchmark::State& state) {
 }
 BENCHMARK(EvaluateAllSevenCards);
 
-static void EvaluateAllEightCards(benchmark::State& state) {
-  for (auto _ : state) {
-    for(int a = 0; a < 45; a++) {
-      for(int b = a + 1; b < 46; b++) {
-        for(int c = b + 1; c < 47; c++) {
-          for(int d = c + 1; d < 48; d++) {
-            for(int e = d + 1; e < 49; e++) {
-              for(int f = e + 1; f < 50; f++) {
-                for(int g = f + 1; g < 51; g++) {
-                  for(int h = g + 1; h < 52; h++) {
-                    EvaluateCards(a, b, c, d, e, f, g, h);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-BENCHMARK(EvaluateAllEightCards);
-
-static void EvaluateAllNineCards(benchmark::State& state) {
-  for (auto _ : state) {
-    for(int a = 0; a < 44; a++) {
-      for(int b = a + 1; b < 45; b++) {
-        for(int c = b + 1; c < 46; c++) {
-          for(int d = c + 1; d < 47; d++) {
-            for(int e = d + 1; e < 48; e++) {
-              for(int f = e + 1; f < 49; f++) {
-                for(int g = f + 1; g < 50; g++) {
-                  for(int h = g + 1; h < 51; h++) {
-                    for(int i = h + 1; i < 52; i++) {
-                      EvaluateCards(a, b, c, d, e, f, g, h, i);
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-BENCHMARK(EvaluateAllNineCards);
-
 static void EvaluateAllOmahaCards(benchmark::State& state) {
   for (auto _ : state) {
     for(int a = 0; a < 44; a++) {
@@ -134,23 +86,6 @@ static void EvaluateAllOmahaCards(benchmark::State& state) {
   }
 }
 BENCHMARK(EvaluateAllOmahaCards);
-
-static void EvaluateAllFiveCardHands(benchmark::State& state) {
-  for (auto _ : state) {
-    for(int a = 0; a < 48; a++) {
-      for(int b = a + 1; b < 49; b++) {
-        for(int c = b + 1; c < 50; c++) {
-          for(int d = c + 1; d < 51; d++) {
-            for(int e = d + 1; e < 52; e++) {
-              EvaluateHand(Hand({a, b, c, d, e}));
-            }
-          }
-        }
-      }
-    }
-  }
-}
-//BENCHMARK(EvaluateAllFiveCardHands);
 
 BENCHMARK_MAIN();
 

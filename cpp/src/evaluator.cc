@@ -35,17 +35,6 @@ Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
   return evaluate_7cards(a, b, c, d, e, f, g);
 }
 
-Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                   const Card& e, const Card& f, const Card& g, const Card& h) {
-  return evaluate_8cards(a, b, c, d, e, f, g, h);
-}
-
-Rank EvaluateCards(const Card& a, const Card& b, const Card& c, const Card& d,
-                   const Card& e, const Card& f, const Card& g, const Card& h,
-                   const Card& i) {
-  return evaluate_9cards(a, b, c, d, e, f, g, h, i);
-}
-
 Rank EvaluateHand(const Hand& hand) {
   if (suits[hand.getSuitHash()])
     return flush[hand.getSuitBinary()[suits[hand.getSuitHash()]-1]];
@@ -56,8 +45,6 @@ Rank EvaluateHand(const Hand& hand) {
     case 5: return noflush5[hash];
     case 6: return noflush6[hash];
     case 7: return noflush7[hash];
-    case 8: return noflush8[hash];
-    case 9: return noflush9[hash];
   }
 
   return noflush5[hash];
