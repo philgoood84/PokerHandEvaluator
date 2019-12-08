@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <cassert>
 #include <algorithm>
 #include <phevaluator/phevaluator.h>
 #include "gtest/gtest.h"
@@ -31,11 +30,11 @@ TEST(EvaluationTest, TestFiveCards) {
             int ph_eval = EvaluateCards(a, b, c, d, e).value(); // C++ method
             int kev_eval = kev_eval_5cards(a, b, c, d, e); // Kev's method
 
-            assert(ph_eval == kev_eval);
+            EXPECT_EQ(ph_eval, kev_eval);
 
             Hand hand({a, b, c, d, e});
             int ph_hand_eval = EvaluateHand(hand).value();
-            assert(ph_hand_eval == kev_eval);
+            EXPECT_EQ(ph_hand_eval, kev_eval);
 
             count++;
 
@@ -77,11 +76,11 @@ TEST(EvaluationTest, TestSixCards) {
               int ph_eval = EvaluateCards(a, b, c, d, e, f).value(); // C++ method
               int kev_eval = kev_eval_6cards(a, b, c, d, e, f); // Kev's method
 
-              assert(ph_eval == kev_eval);
+              EXPECT_EQ(ph_eval, kev_eval);
 
               Hand hand({a, b, c, d, e, f});
               int ph_hand_eval = EvaluateHand(hand).value();
-              assert(ph_hand_eval == kev_eval);
+              EXPECT_EQ(ph_hand_eval, kev_eval);
 
               count++;
 
@@ -126,11 +125,11 @@ TEST(EvaluationTest, TestSevenCards) {
                 int ph_eval = EvaluateCards(a, b, c, d, e, f, g).value();
                 int kev_eval = kev_eval_7cards(a, b, c, d, e, f, g);
 
-                assert(ph_eval == kev_eval);
+                EXPECT_EQ(ph_eval, kev_eval);
 
                 Hand hand({a, b, c, d, e, f, g});
                 int ph_hand_eval = EvaluateHand(hand).value();
-                assert(ph_hand_eval == kev_eval);
+                EXPECT_EQ(ph_hand_eval, kev_eval);
 
                 count++;
 
