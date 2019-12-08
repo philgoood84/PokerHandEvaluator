@@ -133,8 +133,8 @@ int evaluate_omaha_cards(int c1, int c2, int c3, int c4, int c5,
   quinary_hole[(h3 >> 2)]++;
   quinary_hole[(h4 >> 2)]++;
 
-  const int board_hash = hash_quinary(quinary_board, 13, 5);
-  const int hole_hash = hash_quinary(quinary_hole, 13, 4);
+  const int board_hash = hash_quinary(quinary_board, 5);
+  const int hole_hash = hash_quinary(quinary_hole, 4);
 
   value_noflush = noflush_omaha[board_hash * 1820 + hole_hash];
 

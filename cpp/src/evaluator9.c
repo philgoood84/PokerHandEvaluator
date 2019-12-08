@@ -102,7 +102,7 @@ int evaluate_9cards(int a, int b, int c, int d, int e, int f, int g, int h, int 
   quinary[(h >> 2)]++;
   quinary[(i >> 2)]++;
 
-  const int hash = hash_quinary(quinary, 13, 9);
+  const int hash = hash_quinary(quinary, 9);
 
   value_noflush = noflush9[hash];
 

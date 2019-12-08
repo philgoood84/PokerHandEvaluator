@@ -39,7 +39,7 @@ Rank EvaluateHand(const Hand& hand) {
   if (suits[hand.getSuitHash()])
     return flush[hand.getSuitBinary()[suits[hand.getSuitHash()]-1]];
 
-  const int hash = hash_quinary(hand.getQuinary().data(), 13, hand.size());
+  const int hash = hash_quinary(hand.getQuinary().data(), hand.size());
 
   switch (hand.size()) {
     case 5: return noflush5[hash];

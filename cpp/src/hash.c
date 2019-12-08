@@ -17,9 +17,10 @@
 #include <stdio.h>
 #include "tables.h"
 
-int hash_quinary(const unsigned char q[], int len, int k)
+int hash_quinary(const unsigned char q[], int k)
 {
   int sum = 0;
+  const int len = 13;
   int i;
 
   for (i=0; i<len; i++)
@@ -37,27 +38,4 @@ int hash_quinary(const unsigned char q[], int len, int k)
   return sum;
 }
 
-int hash_binary(const unsigned char q[], int len, int k)
-{
-  int sum = 0;
-  int i;
-
-  for (i=0; i<len; i++)
-  {
-    if (q[i])
-    {
-      if (len-i-1 >= k)
-        sum += choose[len-i-1][k];
-
-      k--;
-
-      if (k == 0)
-      {
-        break;
-      }
-    }
-  }
-
-  return sum;
-}
 

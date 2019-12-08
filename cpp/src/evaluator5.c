@@ -86,7 +86,7 @@ int evaluate_5cards(int a, int b, int c, int d, int e) {
   quinary[(d >> 2)]++;
   quinary[(e >> 2)]++;
 
-  const int hash = hash_quinary(quinary, 13, 5);
+  const int hash = hash_quinary(quinary, 5);
 
   return noflush5[hash];
 }

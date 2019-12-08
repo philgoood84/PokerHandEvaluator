@@ -96,7 +96,7 @@ int evaluate_8cards(int a, int b, int c, int d, int e, int f, int g, int h)
   quinary[(g >> 2)]++;
   quinary[(h >> 2)]++;
 
-  const int hash = hash_quinary(quinary, 13, 8);
+  const int hash = hash_quinary(quinary, 8);
 
   value_noflush = noflush8[hash];
 
