@@ -12,7 +12,7 @@ stronger? Or more generally, given one poker hand, can we assign a score to
 it indicating its strength?
 
 Cactus Kev once gave [an answer](http://suffe.cool/poker/evaluator.html) for
-a five card poker hand evaluation. With smart encoding, it ranks each hand
+a five-card poker hand evaluation. With smart encoding, it ranks each hand
 to 7462 distinct values.
 
 Still, Kev's solution is specific for a five-card hand. To evaluate a
@@ -21,7 +21,7 @@ Kev's algorithm, one brute force solution is to iterate all 7 choose 5
 combination, running his five-card evaluation algorithm 21 times to find the
 best answer, which is apparently too time-inefficient. Omaha poker would be
 even more complicated, as it requires picking exactly two cards from four
-of player's cards, and exactly three cards from five community cards. Using
+player's cards, and exactly three cards from five community cards. Using
 brute force, it would take 60 iterations (5 choose 3 multiplied by 4 choose 2)
 of Kev's 5-card evaluation algorithm.
 
