@@ -4,6 +4,11 @@ project(PokerHandEvaluator VERSION 0.2.0)
 
 set(CMAKE_BUILD_TYPE  "Release")
 
+# Use C++ 11 Standard to compile
+set(CMAKE_CXX_STANDARD 11)
+
+set(CMAKE_C_STANDARD 99)
+
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
@@ -55,12 +60,6 @@ add_subdirectory(
     ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build
     EXCLUDE_FROM_ALL
 )
-
-# Use C++ 11 Standard to compile
-set(CMAKE_CXX_STANDARD 11)
-
-set(CMAKE_C_STANDARD 99)
-
 
 # Add the PokerHandEvaluator library
 add_library(pheval STATIC
