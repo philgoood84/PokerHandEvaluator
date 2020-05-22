@@ -120,3 +120,8 @@ add_executable(cpp_example
   examples/cpp_example.cc
 )
 target_link_libraries(cpp_example pheval)
+
+add_executable(omaha_example
+  examples/omaha_example.cc
+)
+target_link_libraries(omaha_example phevalomaha)

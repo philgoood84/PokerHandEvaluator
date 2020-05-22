@@ -23,7 +23,9 @@ jobs:
         - mkdir -p cpp/build
         - cd cpp/build
         - cmake .. ; make
-      script: ./unit_tests --gtest_filter="EvaluationTest.TestOmahaCards"
+      script:
+        - ./omaha_example
+        - ./unit_tests --gtest_filter="EvaluationTest.TestOmahaCards"
     - language: python
       python: 3.7
       before_install:
