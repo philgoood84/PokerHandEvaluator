@@ -6,18 +6,25 @@ CXXFLAGS+=-O2 -std=c++14
 
 all: libpheval.a
 
-libpheval.a: src/evaluator5.o src/hashtable5.o \
-             src/evaluator6.o src/hashtable6.o \
-             src/evaluator7.o src/hashtable7.o \
-             src/hash.o src/hashtable.o src/dptables.o src/evaluator.o src/hand.o \
-             src/rank.o src/7462.o
+libpheval.a: src/evaluator5.c.o src/hashtable5.c.o \
+             src/evaluator6.c.o src/hashtable6.c.o \
+             src/evaluator7.c.o src/hashtable7.c.o \
+             src/hash.c.o src/hashtable.c.o src/dptables.c.o src/evaluator.cc.o src/hand.cc.o \
+             src/rank.c.o src/7462.c.o
 	ar rcs $@ $^
 
-%.o: %.c
+libphevalomaha.a: src/dptables.c.o src/tables_omaha.c.o \
+                  src/evaluator_omaha.c.o src/evaluator_omaha.cc.o \
+                  src/hash.c.o src/hand.cc.o \
+                  src/hashtable.c.o src/rank.c.o \
+                  src/7462.c.o
+	ar rcs $@ $^
+
+%.c.o: %.c
 	${CC} -c ${CFLAGS} -I${INCLUDE} $< -o $@
 
-%.o: %.cc
+%.cc.o: %.cc
 	${CXX} -c ${CXXFLAGS} -I${INCLUDE} $< -o $@
 
 clean:
-	rm src/*.o libpheval.a
+	rm -f src/*.o libpheval.a libphevalomaha.a
