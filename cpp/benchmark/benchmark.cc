@@ -84,71 +84,87 @@ static std::vector<int> RandomCardSample(int size) {
   return ret;
 }
 
-static void EvaluateRandomFiveCards(benchmark::State& state) {
-  for (auto _ : state) {
-    state.PauseTiming();
-    std::vector<int> randomCards = RandomCardSample(5);
-    state.ResumeTiming();
+const int SIZE = 10;
 
-    EvaluateCards(randomCards[0],
-                  randomCards[1],
-                  randomCards[2],
-                  randomCards[3],
-                  randomCards[4]);
+static void EvaluateRandomFiveCards(benchmark::State& state) {
+  std::vector<std::vector<int>> hands;
+
+  for (int i = 0; i < SIZE; i++) {
+    hands.push_back(RandomCardSample(5));
+  }
+  for (auto _ : state) {
+    for (int i = 0; i < SIZE; i++) {
+      EvaluateCards(hands[i][0],
+                    hands[i][1],
+                    hands[i][2],
+                    hands[i][3],
+                    hands[i][4]);
+    }
   }
 }
 BENCHMARK(EvaluateRandomFiveCards);
 
 static void EvaluateRandomSixCards(benchmark::State& state) {
-  for (auto _ : state) {
-    state.PauseTiming();
-    std::vector<int> randomCards = RandomCardSample(6);
-    state.ResumeTiming();
+  std::vector<std::vector<int>> hands;
 
-    EvaluateCards(randomCards[0],
-                  randomCards[1],
-                  randomCards[2],
-                  randomCards[3],
-                  randomCards[4],
-                  randomCards[5]);
+  for (int i = 0; i < SIZE; i++) {
+    hands.push_back(RandomCardSample(6));
+  }
+
+  for (auto _ : state) {
+    for (int i = 0; i < SIZE; i++) {
+      EvaluateCards(hands[i][0],
+                    hands[i][1],
+                    hands[i][2],
+                    hands[i][3],
+                    hands[i][4],
+                    hands[i][5]);
+    }
   }
 }
 BENCHMARK(EvaluateRandomSixCards);
 
 static void EvaluateRandomSevenCards(benchmark::State& state) {
-  for (auto _ : state) {
-    state.PauseTiming();
-    std::vector<int> randomCards = RandomCardSample(7);
-    state.ResumeTiming();
+  std::vector<std::vector<int>> hands;
 
-    EvaluateCards(randomCards[0],
-                  randomCards[1],
-                  randomCards[2],
-                  randomCards[3],
-                  randomCards[4],
-                  randomCards[5],
-                  randomCards[6]);
+  for (int i = 0; i < SIZE; i++) {
+    hands.push_back(RandomCardSample(7));
+  }
+
+  for (auto _ : state) {
+    for (int i = 0; i < SIZE; i++) {
+      EvaluateCards(hands[i][0],
+                    hands[i][1],
+                    hands[i][2],
+                    hands[i][3],
+                    hands[i][4],
+                    hands[i][5],
+                    hands[i][6]);
+    }
   }
 }
 BENCHMARK(EvaluateRandomSevenCards);
 
 static void EvaluateRandomOmahaCards(benchmark::State& state) {
-  for (auto _ : state) {
-    state.PauseTiming();
-    std::vector<int> randomCards = RandomCardSample(9);
-    state.ResumeTiming();
+  std::vector<std::vector<int>> hands;
 
-    EvaluateOmahaCards(randomCards[0],
-                       randomCards[1],
-                       randomCards[2],
-                       randomCards[3],
-                       randomCards[4],
-                       randomCards[5],
-                       randomCards[6],
-                       randomCards[7],
-                       randomCards[8]);
+  for (int i = 0; i < SIZE; i++) {
+    hands.push_back(RandomCardSample(9));
   }
-}
+
+  for (auto _ : state) {
+    for (int i = 0; i < SIZE; i++) {
+      EvaluateOmahaCards(hands[i][0],
+                         hands[i][1],
+                         hands[i][2],
+                         hands[i][3],
+                         hands[i][4],
+                         hands[i][5],
+                         hands[i][6],
+                         hands[i][7],
+                         hands[i][8]);
+    }
+  }}
 BENCHMARK(EvaluateRandomOmahaCards);
 
 BENCHMARK_MAIN();
