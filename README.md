@@ -66,7 +66,6 @@ EvaluateRandomFiveCards         233 ns          233 ns      2894078
 EvaluateRandomSixCards          242 ns          242 ns      2778563
 EvaluateRandomSevenCards        273 ns          273 ns      2700666
 EvaluateRandomOmahaCards        471 ns          471 ns      1441785
-The command "./benchmark_phevaluator" exited with 0.
 ```
 
 |   | Number of Hands | Time Used | Hands per Second | Memory Used |
@@ -79,7 +78,7 @@ The command "./benchmark_phevaluator" exited with 0.
 | Random 7-card Hands | 10 | 273 ns | 36 M/s | 404K |
 | Random Omaha Hands | 10 | 471 ns | 21 M/s | 404K |
 
-* I didn't measure the memory correctly. Basically 404K is the maximum
+* I didn't measure the memory properly. Basically 404K is the maximum
 memory used in all the evaluation methods.
 
 ## Python Implementation
