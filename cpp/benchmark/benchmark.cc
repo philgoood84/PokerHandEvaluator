@@ -84,7 +84,7 @@ static std::vector<int> RandomCardSample(int size) {
   return ret;
 }
 
-const int SIZE = 10;
+const int SIZE = 100;
 
 static void EvaluateRandomFiveCards(benchmark::State& state) {
   std::vector<std::vector<int>> hands;
