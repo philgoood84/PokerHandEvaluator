@@ -78,7 +78,7 @@ add_library(pheval STATIC
   src/7462.c
 )
 target_include_directories(pheval PUBLIC include)
-target_compile_options(pheval PUBLIC -O2)
+target_compile_options(pheval PUBLIC -O3)
 
 add_library(phevalomaha STATIC
   src/dptables.c
@@ -92,7 +92,7 @@ add_library(phevalomaha STATIC
   src/7462.c
 )
 target_include_directories(phevalomaha PUBLIC include)
-target_compile_options(phevalomaha PUBLIC -O2)
+target_compile_options(phevalomaha PUBLIC -O3)
 
 add_executable(unit_tests
   test/evaluation.cc
@@ -101,7 +101,7 @@ add_executable(unit_tests
   test/kev/fast_eval.c
   test/kev/kev_eval.c
 )
-target_compile_options(unit_tests PUBLIC -O2)
+target_compile_options(unit_tests PUBLIC -O3)
 target_link_libraries(unit_tests gtest_main pheval phevalomaha)
 
 add_test(NAME unit_tests COMMAND unit_tests)
@@ -109,6 +109,7 @@ add_test(NAME unit_tests COMMAND unit_tests)
 add_executable(benchmark_phevaluator
   benchmark/benchmark.cc
 )
+target_compile_options(benchmark_phevaluator PUBLIC -O3)
 target_link_libraries(benchmark_phevaluator benchmark pheval phevalomaha)
 
 add_executable(c_example
