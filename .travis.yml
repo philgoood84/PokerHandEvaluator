@@ -9,7 +9,8 @@ jobs:
       script:
         - ./c_example
         - ./cpp_example
-        - ./unit_tests --gtest_filter="-EvaluationTest.TestOmahaCards" # Skip OmahaTests
+        - ./omaha_example
+        - ./unit_tests
     - language: cpp
       name: C++ Benchmark
       before_script:
@@ -17,15 +18,6 @@ jobs:
         - cd cpp/build
         - cmake .. ; make
       script: ./benchmark_phevaluator
-    - language: cpp
-      name: C++ Omaha Test
-      before_script:
-        - mkdir -p cpp/build
-        - cd cpp/build
-        - cmake .. ; make
-      script:
-        - ./omaha_example
-        - ./unit_tests --gtest_filter="EvaluationTest.TestOmahaCards"
     - language: python
       python: 3.7
       before_install:
