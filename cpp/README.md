@@ -71,11 +71,11 @@ phevaluator::Rank rank2 =
   phevaluator::EvaluateCards("9c", "4c", "4s", "9d", "4h", "2c", "9c");
 ```
 
-Now that we have the Ranks from both players' hands. What information can
+Now that we have the `Rank`s from both players' hands. What information can
 we get from them?
 
-First, we can do comparison on these Ranks. A stronger hand is greater than
-a weaker hand.
+First, we can do comparison on these `Rank`s. The `Rank` from a stronger
+hand is greater than the `Rank` from a weaker hand.
 
 ```C++
 assert(rank1 < rank2); // rank2 is stronger
@@ -91,7 +91,7 @@ int value1 = rank1.value(); // 292
 int value2 = rank2.value(); // 236
 ```
 
-We can also tell the ranking category of the rank: either using the method
+We can also tell the ranking category of the `Rank`: either using the method
 `category` which returns an enumerator, or the method `describeCategory`
 which returns a string. In this example, both players are holding full houses.
 
@@ -103,13 +103,13 @@ assert(rank2.category() == FULL_HOUSE);
 assert(rank2.describeCategory() == "Full House");
 ```
 
-Apart from the ranking category, we can get more detail from the rank, using
-the `describeRank` or the `describeSampleHand` method.
+Apart from the ranking category, we can use the `describeSampleHand` method to
+see the five cards in this `Rank`.
 
 Let's see a sample hand from the `rank2`:
 
 ```C++
-assert(rank2.describeSampleHand() == "9 9 9 4 4");
+assert(rank2.describeSampleHand() == "99944");
 ```
 
 As we can see, the best 5-card hand from player 2 is 9-9-9-4-4. Suit
@@ -119,13 +119,6 @@ tells us whether the sample hand is a flush. In this example, it is not.
 
 ```C++
 assert(!rank2.isFlush());
-```
-
-Finally, we have another method to give us a short description of the sample
-hand:
-
-```C++
-assert(rank2.describeRank() == "Nines Full over Fours");
 ```
 
 ### Example Code in C
@@ -190,7 +183,7 @@ const char * categoryDesc = describe_rank_category(category); // "Full House"
 Or get the sample hand from the rank:
 
 ```C
-describe_sample_hand(rank2); // 9 9 9 4 4
+describe_sample_hand(rank2); // 99944
 ```
 
 We can see the 5 best cards from player 2 are 9 9 9 4 4.
@@ -201,12 +194,6 @@ all five cards are in the same suit or not. We can check it using the
 
 ```C
 is_flush(rank2); // false
-```
-
-Finally, we can use `rank_description` to get a short description of the rank:
-
-```C
-describe_rank(rank2); // Nines Full over Fours
 ```
 
 <a name="cardid"></a>
