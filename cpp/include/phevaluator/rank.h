@@ -50,6 +50,12 @@ const char* describe_rank_category(enum rank_category category);
 
 /*
  * Given a rank from 1 to 7462
+ * Returns a string description of the rank, e.g. "King-High Straight Flush"
+ */
+const char* describe_rank(int rank);
+
+/*
+ * Given a rank from 1 to 7462
  * Returns a string description of a sample hand of the rank, e.g. "AKQJT"
  */
 const char* describe_sample_hand(int rank);
@@ -107,6 +113,10 @@ class Rank {
 
   std::string describeCategory() const {
     return describe_rank_category(category());
+  }
+
+  std::string describeRank() const {
+    return describe_rank(value_);
   }
 
   std::string describeSampleHand() const {

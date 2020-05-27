@@ -28,6 +28,7 @@ int main()
   assert(rank1.value() == 1578);
   std::cout << "Player 1 has:" << std::endl;
   std::cout << rank1.describeCategory() << std::endl;
+  std::cout << rank1.describeRank() << std::endl;
   std::cout << rank1.describeSampleHand() << std::endl;
 
   std::cout << std::endl;
@@ -35,6 +36,7 @@ int main()
   assert(rank2.value() == 1604);
   std::cout << "Player 2 has:" << std::endl;
   std::cout << rank2.describeCategory() << std::endl;
+  std::cout << rank2.describeRank() << std::endl;
   std::cout << rank2.describeSampleHand() << std::endl;
 
 	return 0;
