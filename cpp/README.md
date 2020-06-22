@@ -58,7 +58,7 @@ We can construct a Card by providing a two character string, like this:
 phevaluator::Card a = phevaluator::Card("Qc");
 ```
 
-Then the method `EvaluateCards` will take parameters from 5 to 9 Cards and
+Then the method `EvaluateCards` will take parameters from 5 to 7 Cards and
 return a Rank type. Sometimes, you can provide the strings directly to the
 method and let the Cards be constructed implicitly, to make your code
 cleaner.
